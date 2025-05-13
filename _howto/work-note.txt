@@ -1,0 +1,333 @@
+
+python  /home/abner/abner2/zdev/ai/pytest/others/clock.py
+<--------------------------------------->
+ssh root@182.92.220.47
+root/ houzy@1837
+<--------------------------------------->
+Username for 'https://gitee.com': python191@163.com         
+Password for 'https://python191%40163.com@gitee.com': Ctb@2019
+<--------------------------------------->
+docker run -i -t -v ./:/guopu:rw --gpus all --shm-size 16G nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04  /bin/bash
+
+<--------------------------------------->
+abner@abner-XPS:~$ sudo mkdir /mnt/mdisk2t
+abner@abner-XPS:~$ sudo mount -t ntfs-3g /dev/sdc1 /mnt/mdisk2t
+abner@abner-XPS:~$ sudo umount /mnt/mdisk2t 
+
+<--------------------------------------->
+/home/abner/programs/OpenJUMP-2.4.0-r5303[6c9a02d]-PLUS/bin/oj_linux.sh
+
+<--------------------------------------->
+（1）mp4 声音转文字
+（2）mp4 
+<--------------------------------------->
+export http_proxy=http://127.0.0.1:8123
+export https_proxy=http://127.0.0.1:8123
+
+
+export http_proxy=http://192.168.1.107:8123
+export https_proxy=http://192.168.1.107:8123
+
+export HTTP_PROXY=http://192.168.1.107:8123
+export HTTPS_PROXY=http://192.168.1.107:8123
+
+
+docker run --dns 8.8.8.8 --dns 8.8.4.4 -itd   -e  http_proxy=http://192.168.1.107:8123  -e  https_proxy=http://192.168.1.107:8123  alpine:latest  sh
+
+------------------------------------------
+how to read code in github 
+https://github.com/ultralytics/ultralytics
+把前缀github改成 deepwiki：
+https://deepwiki.com/ultralytics/ultralytics
+
+<--------------------------------------->
+(1)source activate
+【解决】CommandNotFoundError: Your shell has not been properly configured to use conda activate
+ 
+已于 2023-01-17 17:01:51 修改
+ ———————————————— 
+原文链接：https://blog.csdn.net/Caesar6666/article/details/125962432
+在linux系统中，安装了anaconda，配置了conda环境变量，也使用conda命令创建了新的环境my_env，但在使用conda激活时，报错。
+
+报错问题
+输入：
+
+conda activate my_env
+1
+报错：
+
+CommandNotFoundError: Your shell has not been properly configured to use ‘conda activate’.
+To initialize your shell, run
+
+$ conda init <SHELL_NAME>
+
+Currently supported shells are:
+
+bash
+fish
+tcsh
+xonsh
+zsh
+powershell
+See ‘conda init --help’ for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running ‘conda init’.
+
+解决方法
+在终端执行以下两条命令：
+
+source activate
+source deactivate
+----------------------------------------
+
+(1.1) install pytorch 
+
+conda create -n pytorch-py36 python=3.6 -c conda-forge
+#
+# To activate this environment, use
+#
+#     $ conda activate pytorch-py36
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+
+
+pip3 install torch torchvision torchaudio
+conda install pytorch::pytorch torchvision torchaudio -c pytorch
+（1.2）delete env
+conda remove -n your_env_name --all
+conda remove -n pytorch-py36 --all
+
+(2) 
+export GOROOT=$HOME/programs/go1.20.6.linux-amd64
+export GOPATH=$HOME/abner2/zdev/gopath
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin　　　
+
+
+export DYLD_FALLBACK_LIBRARY_PATH=/Users/maoqigu/_work/china-navigation-diag/build/mac/NaviCore/Debug/
+
+ 
+å
+export DYLD_FALLBACK_LIBRARY_PATH=/Users/maoqigu/duanzy/230818/china-navigation/build/mac/NaviCore/Debug/
+
+(4)
+
+https://team.apac.sp.wp.corpintra.net/sites/04217/WebPages/PortalHometmp.aspx 
+China OneSite (corpintra.net)
+user : apac\maoqigu
+pass : Ctx@XXXxxxx
+
+
+ 
+
+(5) Android Studio --> [Appearance & Behavior]-->[System Setting] -->[HTTP Proxy]
+    
+choose <Auto-detect proxy setting> 
+  [Auto-detect proxy configuration URL :] http://browsercfg.rd.corpintra.net:8899/059/proxy.pac
+                   http://proxy.cn.svc.corpintra.net/proxy.pac
+
+ (5.1)duanzhiyuan/zhaofeng :   http://browsercfg.rd.corpintra.net:8899/059/proxy.pac
+     my:              http://proxy.cn.svc.corpintra.net/proxy.pac
+ (5.2)/Users/maoqigu/.gradle/gradle.properties
+
+## For more details on how to configure your build environment visit
+# http://www.gradle.org/docs/current/userguide/build_environment.html
+#
+# Specifies the JVM arguments used for the daemon process.
+# The setting is particularly useful for tweaking memory settings.
+# Default value: -Xmx1024m -XX:MaxPermSize=256m
+# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+#
+# When configured, Gradle will run in incubating parallel mode.
+# This option should only be used with decoupled projects. For more details, visit
+# https://developer.android.com/r/tools/gradle-multi-project-decoupled-projects
+# org.gradle.parallel=true
+#Thu Aug 22 07:37:37 CST 2024
+# systemProp.http.proxyHost=
+# systemProp.http.proxyPort=8080 
+# systemProp.https.proxyHost=
+# systemProp.https.proxyPort=8080 
+
+systemProp.http.proxyHost=proxy-loc-rd-01.rd.corpintra.net
+systemProp.http.proxyPort=8080
+systemProp.http.proxyUser=maoqigu
+systemProp.http.proxyPassword=Ctb@2451975
+systemProp.https.proxyHost=proxy-loc-rd-01.rd.corpintra.net
+systemProp.https.proxyPort=8080
+systemProp.https.proxyUser=maoqigu
+systemProp.https.proxyPassword=Ctb@2451975
+
+
+
+
+(6) 解决Android studio第一次创建项目下载gradle很慢的问题
+去到这个路径下，查看自己的版本，在官网下载适合自己的版本；
+https://services.gradle.org/distributions/
+下载格式为 ：gradle-版本号-all.zip  
+
+（7）req links: 
+(7.1)Parking 
+[i3_SOP] Search Parking POI & Detail Information 
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-59001
+[i3_SOP] Indoor 3D Parking
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-59148
+
+(7.2) AdasisV2
+AdasisV2 FCI Support for L2+
+https://issue.swf.i.mercedes-benz.com/browse/REQ-58759
+
+(7.3) Navigation-Map Update
+https://issue.swf.i.mercedes-benz.com/browse/REQ-57736
+https://issue.swf.i.mercedes-benz.com/browse/REQ-59899
+
+ 
+ 
+(7.4)search 的req的总票 ： [REQ-57738] Navigation-Search 
+        REQ-59819 [Search] [Onboard Navigation] POI Detail
+
+Routing的req总票 ： [REQ-57739] Navigation-Routing 
+   [REQ-59881] [i3_SOP][Navistance] Navigation - Route Guidance
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-59881
+        https://sdp.i.mercedes-benz.com/confluence/pages/viewpage.action?spaceKey=NTGSNAVI&title=Guidance+View+for+Navistance+on+IC
+        https://wiki.swf.i.mercedes-benz.com/display/apricotui/N08.2.01+-+route+guidance
+        [REQ-59798] [Routing] [Onboard Navigation] Recalculation 
+        [REQ-13272] [Routing] Resume Route(General)  
+        [REQ-62355] [i3_SOP][Routing]Familiar Route  
+[Guidance req总票] REQ-57741  Navigation-Guidance incl. connected navigation
+
+
+
+(7.5)navistance req 
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Viewpoints
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62644
+
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Vehicles
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62661
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Tunnel
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62653
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Timing+Parameters
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62652
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Structure+and+Layers
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62667
+
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Static+Surrounding+Objects
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62651
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Roadmarkings
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62669
+         
+        dongfang: getRoadMarkings, roadMarkingsChanged
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Prioritization
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62645
+
+
+
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Lanes
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62665
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Lane+Delimitation
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62662
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Ego+Car
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62663
+
+        Basic - Display & Hide Area 
+        https://sdp.i.mercedes-benz.com/confluence/pages/viewpage.action?pageId=1262552125
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62646
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Cameras
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62648
+         
+
+        https://sdp.i.mercedes-benz.com/jira/browse/ICIF-451
+
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Buildings
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62660
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Basic+-+Bridges
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62647
+         
+
+
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Assistance+-+Adaptive+Cruise+Control
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62657
+         
+        Assistance - Automatic Lane Change Assist (Level 2+) : https://sdp.i.mercedes-benz.com/confluence/pages/viewpage.action?pageId=1262552184 
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62673
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Assistance+-+Autonomous+Emergency+Braking
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62672
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Assistance+-+Blind+Spot+Monitoring
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62671
+
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Assistance+-+Lane+Support+System
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62664 
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Assistance+-+Safe+Release+Assistant
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62668 
+
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Assistance+-+Traffic+Lights 
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62656
+
+ 
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Navigation+-+Parking+Area
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62649
+ 
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Navigation+-+Areas
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62670
+
+
+ 
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Navigation+-+Destinations 
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62654
+         
+        Navigation - Lane Recommendation (Lane Carpet) : https://sdp.i.mercedes-benz.com/confluence/pages/viewpage.action?pageId=1262552157
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62655
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Navigation+-+Maneuver+Turns
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62658
+         
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Navigation+-+Offroad
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62650
+         
+        https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/Navigation+-+Street+Names
+        https://issue.swf.i.mercedes-benz.com/browse/REQ-62666        
+
+（8）epic links
+
+APRICOTAMP-4438  Master Epic for Project i3_SOP 
+APRICOTAMP-7980 [i3_SOP][LLN][Guidance]Route Guidance
+APRICOTAMP-6857 [i3_SOP][Search]POI Detail
+
+(9)  ui组的i3 sop的新时序都贴在这里。  
+https://sdp.i.mercedes-benz.com/confluence/display/NTGSNAVI/10+%5BGen20i3SOP%5D+IF+change
+ 
+（10） 新的解backtrace的命令 
+python /cicd/share/tools/parse_backtrace.py -p /cicd/share/i3/debug_symbol/MX-0.32.0-cn_amap_Navi_E057.4-STAR3.5_V0.1.24042910_mbient.debug:/opt/mbient-i3-E060.0-STAR3.5/1.0/sysroots/cortexa78c-mbient-linux/lib/.debug/:/home/shitailai/src/cnnavi-i3_map/build/gen20x-mbient-i3-E060.0-STAR3.5/bin/ ./backtrace.dmp
+ 
+python /cicd/share/tools/parse_backtrace.py -p /cicd/share/i3/debug_symbol/MX-0.32.0-cn_amap_Navi_E057.4-STAR3.5_V0.1.24042910_mbient.debug:/opt/mbient-i3-E060.0-STAR3.5/1.0/sysroots/cortexa78c-mbient-linux/usr/lib/:/opt/mbient-i3-E060.0-STAR3.5/1.0/sysroots/cortexa78c-mbient-linux/lib/.debug/:/home/shitailai/src/cnnavi-i3_map/build/gen20x-mbient-i3-E060.0-STAR3.5/bin/ -a /opt/mbient-i3-E060.0-STAR3.5/1.0/sysroots/cortexa78c-mbient-linux/usr/bin/addr2line ./backtrace.dmp
+
+
+
+
+
+python /home/gumaoqiang/i3/cnnavi-i3evr/tools/Unity/parse_backtrace.py -p /home/gumaoqiang/cicd/MX-0.40.0-cn_amap_Navi_E063.0-STAR3.5_V0.1.24062818_mbient:/opt/mbient-i3-E063.0-STAR3.5/1.0/sysroots/cortexa78c-mbient-linux/usr/lib/:/opt/mbient-i3-E063.0-STAR3.5/1.0/sysroots/cortexa78c-mbient-linux/lib/.debug/:/home/gumaoqiang/i3/cnnavi-i3evr/build/gen20x-mbient-i3-E064.1-STAR3.5/bin -a /opt/mbient-i3-E063.0-STAR3.5/1.0/sysroots/cortexa78c-mbient-linux/usr/bin/addr2line ./backtrace.dmp
+
+
+
+
+推荐 声音转文字  的github 高星项目
