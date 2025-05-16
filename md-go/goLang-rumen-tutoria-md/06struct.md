@@ -669,28 +669,20 @@ Insert() 函数将 *Bag 参数放在第一位，强调 Insert 会操作 *Bag 结
 
 将背包及放入背包的物品中使用Go语言的结构体和方法方式编写，为 *Bag 创建一个方法，代码如下：
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><p>type Bag struct {</p>
-<p>    items []int</p>
-<p>}</p>
-<p>func (b *Bag) Insert(itemid int) {</p>
-<p>    b.items = append(b.items, itemid)</p>
-<p>}</p>
-<p>func main() {</p>
-<p>    b := new(Bag)</p>
-<p>    b.Insert(1001)</p>
-<p>}</p></td>
-</tr>
-</tbody>
-</table>
+```go
+type Bag struct {
+   items []int
+}
+func (b *Bag) Insert(itemid int) {
+    b.items = append(b.items, itemid)
+}
+func main() {
+    b := new(Bag)
+    b.Insert(1001)
+}
+```
 
 第 5 行中，Insert(itemid int) 的写法与函数一致，(b*Bag) 表示接收器，即 Insert 作用的对象实例。
-
 每个方法只能有一个接收器，如下图所示。
 
 <img src="./media06/media/image1.jpeg" style="width:3.94792in;height:1.32292in" alt="IMG_256" />  
@@ -701,19 +693,13 @@ Insert() 函数将 *Bag 参数放在第一位，强调 Insert 会操作 *Bag 结
 ### 6.5.2接收器——方法作用的目标
 
 接收器的格式如下：
-
 func (接收器变量 接收器类型) 方法名(参数列表) (返回参数) {
-
-函数体
-
+    函数体
 }
 
 对各部分的说明：
-
 - 接收器变量：接收器中的参数变量名在命名时，官方建议使用接收器类型名的第一个小写字母，而不是 self、this 之类的命名。例如，Socket 类型的接收器变量应该命名为 s，Connector 类型的接收器变量应该命名为 c 等。
-
 - 接收器类型：接收器类型和参数类似，可以是指针类型和非指针类型。
-
 - 方法名、参数列表、返回参数：格式与函数定义一致。
 
 接收器根据接收器的类型可以分为指针接收器、非指针接收器，两种接收器在使用时会产生不同的效果，根据效果的不同，两种接收器会被用于不同性能和功能要求的代码中。
@@ -721,75 +707,47 @@ func (接收器变量 接收器类型) 方法名(参数列表) (返回参数) {
 #### 1) 理解指针类型的接收器
 
 指针类型的接收器由一个结构体的指针组成，更接近于面向对象中的 this 或者 self。
-
 由于指针的特性，调用方法时，修改接收器指针的任意成员变量，在方法结束后，修改都是有效的。
-
 在下面的例子，使用结构体定义一个属性（Property），为属性添加 SetValue() 方法以封装设置属性的过程，通过属性的 Value() 方法可以重新获得属性的数值，使用属性时，通过 SetValue() 方法的调用，可以达成修改属性值的效果。
-
+```go
 package main
-
 import "fmt"
-
 // 定义属性结构
-
 type Property struct {
-
-value int // 属性值
-
+    value int // 属性值
 }
 
 // 设置属性值
-
 func (p *Property) SetValue(v int) {
-
-// 修改p的成员变量
-
-p.value = v
-
+    // 修改p的成员变量
+    p.value = v
 }
 
 // 取属性值
-
 func (p *Property) Value() int {
-
-return p.value
-
+    return p.value
 }
 
 func main() {
 
-// 实例化属性
-
-p := new(Property)
-
-// 设置值
-
-p.SetValue(100)
-
-// 打印值
-
-fmt.Println(p.Value())
-
+    // 实例化属性
+    p := new(Property)
+    // 设置值
+    p.SetValue(100)
+    // 打印值
+    fmt.Println(p.Value())
 }
-
+```
 运行程序，输出如下：
-
 100
 
 代码说明如下：
-
 - 第 6 行，定义一个属性结构，拥有一个整型的成员变量。
-
 - 第 11 行，定义属性值的方法。
-
 - 第 14 行，设置属性值方法的接收器类型为指针，因此可以修改成员值，即便退出方法，也有效。
-
 - 第 18 行，定义获取值的方法。
-
 - 第 25 行，实例化属性结构。
-
 - 第 28 行，设置值，此时成员变量变为 100。
-
 - 第 31 行，获取成员变量。
 
 #### 2) 理解非指针类型的接收器
@@ -797,67 +755,45 @@ fmt.Println(p.Value())
 当方法作用于非指针接收器时，Go语言会在代码运行时将接收器的值复制一份，在非指针接收器的方法中可以获取接收器的成员值，但修改后无效。
 
 点（Point）使用结构体描述时，为点添加 Add() 方法，这个方法不能修改 Point 的成员 X、Y 变量，而是在计算后返回新的 Point 对象，Point 属于小内存对象，在函数返回值的复制过程中可以极大地提高代码运行效率，详细过程请参考下面的代码。
-
+```go
 package main
 
 import (
-
 "fmt"
-
 )
 
 // 定义点结构
 
 type Point struct {
-
 X int
-
 Y int
-
 }
 
 // 非指针接收器的加方法
-
 func (p Point) Add(other Point) Point {
-
-// 成员值与参数相加后返回新的结构
-
-return Point{p.X + other.X, p.Y + other.Y}
-
+    // 成员值与参数相加后返回新的结构
+    return Point{p.X + other.X, p.Y + other.Y}
 }
 
 func main() {
+    // 初始化点
+    p1 := Point{1, 1}
+    p2 := Point{2, 2}
 
-// 初始化点
-
-p1 := Point{1, 1}
-
-p2 := Point{2, 2}
-
-// 与另外一个点相加
-
-result := p1.Add(p2)
-
-// 输出结果
-
-fmt.Println(result)
-
+    // 与另外一个点相加
+    result := p1.Add(p2)
+    // 输出结果
+    fmt.Println(result)
 }
-
+```
 代码输出如下：
-
 {3 3}
 
 代码说明如下：
-
 - 第 8 行，定义一个点结构，拥有 X 和 Y 两个整型分量。
-
 - 第 14 行，为 Point 结构定义一个 Add() 方法，传入和返回都是点的结构，可以方便地实现多个点连续相加的效果，例如P4 := P1.Add( P2 ).Add( P3 )
-
 - 第 23 和 24 行，初始化两个点 p1 和 p2。
-
 - 第 27 行，将 p1 和 p2 相加后返回结果。
-
 - 第 30 行，打印结果。
 
 由于例子中使用了非指针接收器，Add() 方法变得类似于只读的方法，Add() 方法内部不会对成员进行任何修改。
@@ -865,6 +801,7 @@ fmt.Println(result)
 #### 3) 指针和非指针接收器的使用
 
 在计算机中，小对象由于值复制时的速度较快，所以适合使用非指针接收器，大对象因为复制性能较低，适合使用指针接收器，在接收器和参数间传递时不进行复制，只是传递指针。
+mq注：**非指针接收器** 用于对 对象的成员只有**只读的操作**； **指针接收器** 用于对 对象的成员 有 **写的操作**；
 
 ### 6.5.3示例：二维矢量模拟玩家移动
 
