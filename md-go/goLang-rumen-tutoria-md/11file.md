@@ -314,222 +314,137 @@ writer。例如，下列函数是 invoicedata
 
 [Go语言JSON文件的读写操作](http://c.biancheng.net/view/4545.html)
 
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+----------------------\-\-\-\--------------------
 
-JSON（JavaScript Object
-Notation）是一种轻量级的数据交换格式，易于阅读和编写，同时也易于机器解析和生成。它基于 JavaScript
-Programming Language, Standard ECMA-262 3rd Edition - December 1999
-的一个子集。\
-\
-JSON 是一种使用 UTF-8
-编码的纯文本格式，采用完全独立于语言的文本格式，由于写起来比 XML
-格式方便，并且更为紧凑，同时所需的处理时间也更少，致使 JSON
-格式越来越流行，特别是在通过网络连接传送数据方面。\
-\
-开发人员可以使用 JSON
-传输简单的字符串、数字、布尔值，也可以传输一个数组或者一个更复杂的复合结构。在
-Web 开发领域中，JSON 被广泛应用于 Web
-服务端程序和客户端之间的数据通信。\
-\
-Go语言内建对 JSON 的支持，使用内置的 encoding/json
-标准库，开发人员可以轻松使用Go程序生成和解析 JSON 格式的数据。\
-\
+JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，易于阅读和编写，同时也易于机器解析和生成。它基于 JavaScript
+Programming Language, Standard ECMA-262 3rd Edition - December 1999 的一个子集。
+
+JSON 是一种使用 UTF-8编码的纯文本格式，采用完全独立于语言的文本格式，由于写起来比 XML格式方便，并且更为紧凑，同时所需的处理时间也更少，致使 JSON格式越来越流行，特别是在通过网络连接传送数据方面。
+
+开发人员可以使用 JSON传输简单的字符串、数字、布尔值，也可以传输一个数组或者一个更复杂的复合结构。在Web 开发领域中，JSON 被广泛应用于 Web服务端程序和客户端之间的数据通信。
+
+Go语言内建对 JSON 的支持，使用内置的 encoding/json 标准库，开发人员可以轻松使用Go程序生成和解析 JSON 格式的数据。
+
 JSON 结构如下所示：
-
-{\"key1\":\"value1\",\"key2\":value2,\"key3\":\[\"value3\",\"value4\",\"value5\"\]}
+{"key1":"value1","key2":value2,"key3":["value3","value4","value5"]}
 
 ### 11.2.1写 JSON 文件
 
 使用Go语言创建一个 json 文件非常方便，示例代码如下：
 
 1.  package main
-
 2.  
-
 3.  import (
-
-4.      \"encoding/json\"
-
-5.      \"fmt\"
-
-6.      \"os\"
-
+4.      "encoding/json"
+5.      "fmt"
+6.      "os"
 7.  )
-
 8.  
-
 9.  type Website struct {
-
-10.     Name   string \`xml:\"name,attr\"\`
-
+10.     Name   string `xml:"name,attr"`
 11.     Url    string
-
-12.     Course \[\]string
-
+12.     Course []string
 13. }
-
 14. 
-
 15. func main() {
-
-16. info := \[\]Website{
-
-17. {\"Golang\",
-
-18. \"http://c.biancheng.net/golang/\",
-
-19. \[\]string{\"http://c.biancheng.net/cplus/\",
-
-20. \"http://c.biancheng.net/linux_tutorial/\"}
-
-21. },
-
-22. {\"Java\",
-
-23. \"http://c.biancheng.net/java/\",
-
-24. \[\]string{\"http://c.biancheng.net/socket/\",
-
-25. \"http://c.biancheng.net/python/\"}}}
-
+16.     info := []Website{
+17.           {"Golang",
+18.            "http://c.biancheng.net/golang/",
+19.             []string{"http://c.biancheng.net/cplus/",
+20.                      "http://c.biancheng.net/linux_tutorial/"}
+21.           },
+22.           {"Java",
+23.            "http://c.biancheng.net/java/",
+24.             []string{"http://c.biancheng.net/socket/",
+25.                      "http://c.biancheng.net/python/"}}}
 26. 
-
 27.     // 创建文件
-
-28.     filePtr, err := os.Create(\"info.json\")
-
+28.     filePtr, err := os.Create("info.json")
 29.     if err != nil {
-
-30.         fmt.Println(\"文件创建失败\", err.Error())
-
+30.         fmt.Println("文件创建失败", err.Error())
 31.         return
-
 32.     }
-
 33.     defer filePtr.Close()
-
 34. 
-
 35.     // 创建Json编码器
-
 36.     encoder := json.NewEncoder(filePtr)
-
 37. 
-
 38.     err = encoder.Encode(info)
-
 39.     if err != nil {
-
-40.         fmt.Println(\"编码错误\", err.Error())
-
+40.         fmt.Println("编码错误", err.Error())
 41. 
-
 42.     } else {
-
-43.         fmt.Println(\"编码成功\")
-
+43.         fmt.Println("编码成功")
 44.     }
-
 45. }
 
 运行上面的代码会在当前目录下生成一个 info.json 文件，文件内容如下：
 
-\[\
-    {\
-        \"Name\":\"Golang\",\
-        \"Url\":\"http://c.biancheng.net/golang/\",\
-        \"Course\":\[\
-            \"http://c.biancheng.net/golang/102/\",\
-            \"http://c.biancheng.net/golang/concurrent/\"\
-        \]\
-    },\
-    {\
-        \"Name\":\"Java\",\
-        \"Url\":\"http://c.biancheng.net/java/\",\
-        \"Course\":\[\
-            \"http://c.biancheng.net/java/10/\",\
-            \"http://c.biancheng.net/python/\"\
-        \]\
-    }\
-\]
+[
+    {
+        "Name":"Golang",
+        "Url":"http://c.biancheng.net/golang/",
+        "Course":[
+            "http://c.biancheng.net/golang/102/",
+            "http://c.biancheng.net/golang/concurrent/"
+        ]
+    },
+    {
+        "Name":"Java",
+        "Url":"http://c.biancheng.net/java/",
+        "Course":[
+            "http://c.biancheng.net/java/10/",
+            "http://c.biancheng.net/python/"
+        ]
+    }
+]
 
 ### 11.2.2读 JSON 文件
 
 读 JSON 数据与写 JSON 数据一样简单，示例代码如下：
 
 1.  package main
-
 2.  
-
 3.  import (
-
-4.      \"encoding/json\"
-
-5.      \"fmt\"
-
-6.      \"os\"
-
+4.      "encoding/json"
+5.      "fmt"
+6.      "os"
 7.  )
-
 8.  
-
 9.  type Website struct {
-
-10.     Name   string \`xml:\"name,attr\"\`
-
+10.     Name   string `xml:"name,attr"`
 11.     Url    string
-
-12.     Course \[\]string
-
+12.     Course []string
 13. }
-
 14. 
-
 15. func main() {
-
-16.     filePtr, err := os.Open(\"./info.json\")
-
+16.     filePtr, err := os.Open("./info.json")
 17.     if err != nil {
-
-18.         fmt.Println(\"文件打开失败 \[Err:%s\]\", err.Error())
-
+18.         fmt.Println("文件打开失败 [Err:%s]", err.Error())
 19.         return
-
 20.     }
-
 21.     defer filePtr.Close()
-
-22.     var info \[\]Website
-
+22.     var info []Website
 23.     // 创建json解码器
-
 24.     decoder := json.NewDecoder(filePtr)
-
 25.     err = decoder.Decode(&info)
-
 26.     if err != nil {
-
-27.         fmt.Println(\"解码失败\", err.Error())
-
+27.         fmt.Println("解码失败", err.Error())
 28.     } else {
-
-29.         fmt.Println(\"解码成功\")
-
+29.         fmt.Println("解码成功")
 30.         fmt.Println(info)
-
 31.     }
-
 32. }
 
 运行结果如下：
 
-go run main.go\
-解码成功\
-\[{Golang http://c.biancheng.net/golang/
-\[http://c.biancheng.net/golang/102/
-http://c.biancheng.net/golang/concurrent/\]} {Java
-http://c.biancheng.net/java/ \[http://c.biancheng.net/java/10/
-http://c.biancheng.net/python/\]}\]
+go run main.go
+解码成功
+[{Golang http://c.biancheng.net/golang/
+[http://c.biancheng.net/golang/102/
+http://c.biancheng.net/golang/concurrent/]} {Java
+http://c.biancheng.net/java/ [http://c.biancheng.net/java/10/
+http://c.biancheng.net/python/]}]
 
 顺便提一下，还有一种叫做 BSON (Binary JSON) 的格式与 JSON 非常类似，与
 JSON 相比，BSON 着眼于提高存储和扫描效率。BSON
@@ -540,16 +455,16 @@ JSON 相比，BSON 着眼于提高存储和扫描效率。BSON
 
 Go语言XML文件的读写操作
 
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+---------------\-\-\-\-\-\-\-\-----------------------
 
 XML（extensible Markup
 Language）格式被广泛用作一种数据交换格式，并且自成一种文件格式。与上一节介绍的 JSON 相比
-XML 要复杂得多，而且手动写起来相对乏味得多。\
-\
+XML 要复杂得多，而且手动写起来相对乏味得多。
+
 在 JSON 还未像现在这么广泛使用时，XML 的使用相当广泛。XML
 作为一种数据交换和信息传递的格式，使用还是很广泛的，现在很多开放平台接口，基本都会支持
-XML 格式。\
-\
+XML 格式。
+
 Go语言内置的 **encoding/xml 包**可以用在结构体和 XML
 格式之间进行编解码，其方式跟 encoding/json 包类似。然而与 JSON 相比 XML
 的编码和解码在功能上更苛刻得多，这是由于 encoding/xml
@@ -565,11 +480,11 @@ Go语言内置的 **encoding/xml 包**可以用在结构体和 XML
 
 3.  import (
 
-4.      \"encoding/xml\"
+4.      "encoding/xml"
 
-5.      \"fmt\"
+5.      "fmt"
 
-6.      \"os\"
+6.      "os"
 
 7.  )
 
@@ -577,11 +492,11 @@ Go语言内置的 **encoding/xml 包**可以用在结构体和 XML
 
 9.  type Website struct {
 
-10.     Name   string \`xml:\"name,attr\"\`
+10.     Name   string `xml:"name,attr"`
 
 11.     Url    string
 
-12.     Course \[\]string
+12.     Course []string
 
 13. }
 
@@ -591,15 +506,15 @@ Go语言内置的 **encoding/xml 包**可以用在结构体和 XML
 
 16.     //实例化对象
 
-17.     info := Website{\"C语言中文网\",
-    \"http://c.biancheng.net/golang/\", \[\]string{\"Go语言入门教程\",
-    \"Golang入门教程\"}}
+17.     info := Website{"C语言中文网",
+    "http://c.biancheng.net/golang/", []string{"Go语言入门教程",
+    "Golang入门教程"}}
 
-18.     f, err := os.Create(\"./info.xml\")
+18.     f, err := os.Create("./info.xml")
 
 19.     if err != nil {
 
-20.         fmt.Println(\"文件创建失败\", err.Error())
+20.         fmt.Println("文件创建失败", err.Error())
 
 21.         return
 
@@ -615,13 +530,13 @@ Go语言内置的 **encoding/xml 包**可以用在结构体和 XML
 
 27.     if err != nil {
 
-28.         fmt.Println(\"编码错误：\", err.Error())
+28.         fmt.Println("编码错误：", err.Error())
 
 29.         return
 
 30.     } else {
 
-31.         fmt.Println(\"编码成功\")
+31.         fmt.Println("编码成功")
 
 32.     }
 
@@ -629,11 +544,11 @@ Go语言内置的 **encoding/xml 包**可以用在结构体和 XML
 
 运行上面的代码会在当前目录生成一个 info.xml 文件，文件的内容如下所示：
 
-\<Website name=\"C语言中文网\"\>\
-    \<Url\>http://c.biancheng.net/golang/\</Url\>\
-    \<Course\>Go语言入门教程\</Course\>\
-    \<Course\>Golang入门教程\</Course\>\
-\</Website\>
+<Website name="C语言中文网">
+    <Url>http://c.biancheng.net/golang/</Url>
+    <Course>Go语言入门教程</Course>
+    <Course>Golang入门教程</Course>
+</Website>
 
 ### 11.3.2读 XML 文件
 
@@ -647,11 +562,11 @@ XML 标签的结构体，就不会复杂。示例代码如下：
 
 3.  import (
 
-4.      \"encoding/xml\"
+4.      "encoding/xml"
 
-5.      \"fmt\"
+5.      "fmt"
 
-6.      \"os\"
+6.      "os"
 
 7.  )
 
@@ -659,11 +574,11 @@ XML 标签的结构体，就不会复杂。示例代码如下：
 
 9.  type Website struct {
 
-10.     Name   string \`xml:\"name,attr\"\`
+10.     Name   string `xml:"name,attr"`
 
 11.     Url    string
 
-12.     Course \[\]string
+12.     Course []string
 
 13. }
 
@@ -673,11 +588,11 @@ XML 标签的结构体，就不会复杂。示例代码如下：
 
 16.     //打开xml文件
 
-17.     file, err := os.Open(\"./info.xml\")
+17.     file, err := os.Open("./info.xml")
 
 18.     if err != nil {
 
-19.         fmt.Printf(\"文件打开失败：%v\", err)
+19.         fmt.Printf("文件打开失败：%v", err)
 
 20.         return
 
@@ -697,13 +612,13 @@ XML 标签的结构体，就不会复杂。示例代码如下：
 
 28.     if err != nil {
 
-29.         fmt.Printf(\"解码失败：%v\", err)
+29.         fmt.Printf("解码失败：%v", err)
 
 30.         return
 
 31.     } else {
 
-32.         fmt.Println(\"解码成功\")
+32.         fmt.Println("解码成功")
 
 33.         fmt.Println(info)
 
@@ -713,20 +628,20 @@ XML 标签的结构体，就不会复杂。示例代码如下：
 
 运行结果如下：
 
-go run main.go\
-解码成功\
-{C语言中文网 http://c.biancheng.net/golang/ \[Go语言入门教程
-Golang入门教程\]}
+go run main.go
+解码成功
+{C语言中文网 http://c.biancheng.net/golang/ [Go语言入门教程
+Golang入门教程]}
 
 正如写 XML 时一样，我们无需关心对所读取的 XML
-数据进行转义，xml.NewDecoder.Decode() 函数会自动处理这些。\
-\
+数据进行转义，xml.NewDecoder.Decode() 函数会自动处理这些。
+
 xml 包还支持更为复杂的标签，包括嵌套。例如标签名为
-\'xml:\"Books\>Author\"\' 产生的是
-\<Books\>\<Author\>content\</Author\>\</Books\> 这样的 XML
-内容。同时除了 \'xml:\", attr\"\' 之外，该包还支持 \'xml:\",chardata\"\'
-这样的标签表示将该字段当做字符数据来写，支持 \'xml:\",innerxml\"\'
-这样的标签表示按照字面量来写该字段，以及 \'xml:\",comment\"\'
+'xml:"Books>Author"' 产生的是
+<Books><Author>content</Author></Books> 这样的 XML
+内容。同时除了 'xml:", attr"' 之外，该包还支持 'xml:",chardata"'
+这样的标签表示将该字段当做字符数据来写，支持 'xml:",innerxml"'
+这样的标签表示按照字面量来写该字段，以及 'xml:",comment"'
 这样的标签表示将该字段当做 XML
 注释。因此，通过使用标签化的结构体，我们可以充分利用好这些方便的编码解码函数，同时合理控制如何读写
 XML 数据。
@@ -735,48 +650,48 @@ XML 数据。
 
 Go语言使用Gob传输数据
 
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+------------\-\-\-\-\-\-\-\-\-\-\-\-\--------------
 
 为了让某个数据结构能够在网络上传输或能够保存至文件，它必须被编码然后再解码。当然已经有许多可用的编码方式了，比如 JSON、XML、Google
 的 protocol buffers 等等。而现在又多了一种，由Go语言 encoding/gob
-包提供的方式。\
-\
+包提供的方式。
+
 Gob 是Go语言自己以二进制形式序列化和反序列化程序数据的格式，可以在
 encoding 包中找到。这种格式的数据简称为 Gob（即 Go binary
-的缩写）。类似于 Python 的"pickle"和 Java 的"Serialization"。\
-\
+的缩写）。类似于 Python 的"pickle"和 Java 的"Serialization"。
+
 Gob 和 JSON 的 pack 之类的方法一样，由发送端使用 Encoder
 对数据结构进行编码。在接收端收到消息之后，接收端使用 Decoder
-将序列化的数据变化成本地变量。\
-\
+将序列化的数据变化成本地变量。
+
 Go语言可以通过 JSON 或 Gob 来序列化 struct 对象，虽然 JSON
 的序列化更为通用，但利用 Gob 编码可以实现 JSON 所不能支持的 struct
-的方法序列化，利用 Gob 包序列化 struct 保存到本地也十分简单。\
-\
+的方法序列化，利用 Gob 包序列化 struct 保存到本地也十分简单。
+
 Gob 不是可外部定义、语言无关的编码方式，它的首选的是二进制格式，而不是像
 JSON 或 XML 那样的文本格式。Gob 并不是一种不同于 Go
-的语言，而是在编码和解码过程中用到了 Go 的反射。\
-\
+的语言，而是在编码和解码过程中用到了 Go 的反射。
+
 Gob
 通常用于远程方法调用参数和结果的传输，以及应用程序和机器之间的数据传输。它和
 JSON 或 XML 有什么不同呢？**Gob 特定的用于纯 Go
-的环境中**，例如两个用Go语言写的服务之间的通信。这样的话服务可以被实现得更加高效和优化。\
-\
+的环境中**，例如两个用Go语言写的服务之间的通信。这样的话服务可以被实现得更加高效和优化。
+
 Gob
-文件或流是**完全自描述的**，它里面包含的所有类型都有一个对应的描述，并且都是可以用Go语言解码，而不需要了解文件的内容。\
-\
+文件或流是**完全自描述的**，它里面包含的所有类型都有一个对应的描述，并且都是可以用Go语言解码，而不需要了解文件的内容。
+
 只有可导出的字段会被编码，零值会被忽略。在解码结构体的时候，只有同时匹配名称和可兼容类型的字段才会被解码。当源数据类型增加新字段后，Gob
 解码客户端仍然可以以这种方式正常工作。解码客户端会继续识别以前存在的字段，并且还提供了很大的灵活性，比如在发送者看来，整数被编码成没有固定长度的可变长度，而忽略具体的
-Go 类型。\
-\
+Go 类型。
+
 假如有下面这样一个结构体 T：
 
-type T struct { X, Y, Z int }\
+type T struct { X, Y, Z int }
 var t = T{X: 7, Y: 0, Z: 8}
 
 而在接收时可以用一个结构体 U 类型的变量 u 来接收这个值：
 
-type U struct { X, Y \*int8 }\
+type U struct { X, Y *int8 }
 var u U
 
 在接收时，X 的值是 7，Y 的值是 0（Y 的值并没有从 t
@@ -795,11 +710,11 @@ Encode()，相反的过程使用通用的 io.Reader 接口，通过 NewDecoder()
 
 3.  import (
 
-4.  \"encoding/gob\"
+4.  "encoding/gob"
 
-5.  \"fmt\"
+5.  "fmt"
 
-6.  \"os\"
+6.  "os"
 
 7.  )
 
@@ -807,17 +722,17 @@ Encode()，相反的过程使用通用的 io.Reader 接口，通过 NewDecoder()
 
 9.  func main() {
 
-10. info := map\[string\]string{
+10. info := map[string]string{
 
-11. \"name\": \"C语言中文网\",
+11. "name": "C语言中文网",
 
-12. \"website\": \"http://c.biancheng.net/golang/\",
+12. "website": "http://c.biancheng.net/golang/",
 
 13. }
 
-14. name := \"demo.gob\"
+14. name := "demo.gob"
 
-15. File, \_ := os.OpenFile(name, os.O_RDWR\|os.O_CREATE, 0777)
+15. File, _ := os.OpenFile(name, os.O_RDWR|os.O_CREATE, 0777)
 
 16. defer File.Close()
 
@@ -833,11 +748,11 @@ Encode()，相反的过程使用通用的 io.Reader 接口，通过 NewDecoder()
 
 运行上面的代码会在当前目录下生成 demo.gob 文件，文件的内容如下所示：
 
-0eff 8104 0102 ff82 0001 0c01 0c00 0041\
-ff82 0002 046e 616d 6510 43e8 afad e8a8\
-80e4 b8ad e696 87e7 bd91 0777 6562 7369\
-7465 1e68 7474 703a 2f2f 632e 6269 616e\
-\... \...
+0eff 8104 0102 ff82 0001 0c01 0c00 0041
+ff82 0002 046e 616d 6510 43e8 afad e8a8
+80e4 b8ad e696 87e7 bd91 0777 6562 7369
+7465 1e68 7474 703a 2f2f 632e 6269 616e
+... ...
 
 ### 11.4.2读取 gob 文件
 
@@ -849,11 +764,11 @@ ff82 0002 046e 616d 6510 43e8 afad e8a8\
 
 3.  import (
 
-4.  \"encoding/gob\"
+4.  "encoding/gob"
 
-5.  \"fmt\"
+5.  "fmt"
 
-6.  \"os\"
+6.  "os"
 
 7.  )
 
@@ -861,9 +776,9 @@ ff82 0002 046e 616d 6510 43e8 afad e8a8\
 
 9.  func main() {
 
-10. var M map\[string\]string
+10. var M map[string]string
 
-11. File, \_ := os.Open(\"demo.gob\")
+11. File, _ := os.Open("demo.gob")
 
 12. D := gob.NewDecoder(File)
 
@@ -875,14 +790,14 @@ ff82 0002 046e 616d 6510 43e8 afad e8a8\
 
 运行结果如下：
 
-go run main.go\
-map\[name:C语言中文网 website:http://c.biancheng.net/golang/\]
+go run main.go
+map[name:C语言中文网 website:http://c.biancheng.net/golang/]
 
 ## 11.5 [纯文本文件的读写操作](http://c.biancheng.net/view/4556.html)
 
 Go语言纯文本文件的读写操作
 
-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+----------------\-\-\-\-\-\-\-\-\-\-\-\-\----------
 
 Go语言提供了很多文件操作的支持，在不同场景下，有对应的处理方式，本节我们来介绍一下文本文件的读写操作。
 
@@ -897,11 +812,11 @@ Go语言提供了很多文件操作的支持，在不同场景下，有对应的
 
 3.  import (
 
-4.  \"bufio\"
+4.  "bufio"
 
-5.  \"fmt\"
+5.  "fmt"
 
-6.  \"os\"
+6.  "os"
 
 7.  )
 
@@ -911,13 +826,13 @@ Go语言提供了很多文件操作的支持，在不同场景下，有对应的
 
 10. //创建一个新文件，写入内容
 
-11. filePath := \"./output.txt\"
+11. filePath := "./output.txt"
 
-12. file, err := os.OpenFile(filePath, os.O_WRONLY\|os.O_CREATE, 0666)
+12. file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE, 0666)
 
 13. if err != nil {
 
-14. fmt.Printf(\"打开文件错误= %v \\n\", err)
+14. fmt.Printf("打开文件错误= %v \\n\", err)
 
 15. return
 

@@ -367,3 +367,123 @@ slice := make([]int, 3, 5) // 长度 3，容量 5 的切片，元素为 0
 m := make(map[string]int)  // 空 map
 ch := make(chan int, 2)    // 缓冲容量为 2 的 channel
 ```
+=========================================================
+# 4.结构体标签（struct tag）
+
+```go
+type Website struct {
+	Name   string  `xml:"name,attr"`
+	Url    string
+	Course []string
+}
+
+func Demo_writeJson() {
+	info := []Website{
+		{"Golang",
+			"http://c.biancheng.net/golang/",
+			[]string{"http://c.biancheng.net/cplus/",
+				"http://c.biancheng.net/linux_tutorial/"}},
+		{"Java",
+			"http://c.biancheng.net/java/",
+			[]string{"http://c.biancheng.net/socket/",
+				"http://c.biancheng.net/python/",
+				"http://c11.biancheng.net/python/",
+				"http://c12.biancheng.net/python/"}} }
+
+	// 创建文件
+	filePtr, err := os.Create("info.json")
+	if err != nil {
+		fmt.Println("文件创建失败", err.Error())
+		return
+	}
+	defer filePtr.Close()
+
+	// 创建Json编码器
+	encoder := json.NewEncoder(filePtr)
+
+	err = encoder.Encode(info)
+	if err != nil {
+		fmt.Println("编码错误", err.Error())
+
+	} else {
+		fmt.Println("编码成功")
+	}
+}
+```
+在你的代码中，`xml:"name,attr"` 是一个结构体标签（struct tag），用于指定结构体字段在XML序列化和反序列化时的行为。但需要注意的是，你当前的代码使用的是JSON编码（`json.NewEncoder`），而不是XML，因此这个标签在JSON处理中**不会生效**。
+
+
+### **结构体标签的作用**
+结构体标签是Go语言中一种元数据，用于控制反射（如序列化库）如何处理结构体字段。常见的标签有：
+- `json:"field_name"`：用于JSON序列化/反序列化。
+- `xml:"field_name"`：用于XML序列化/反序列化。
+- `db:"column_name"`：用于ORM（如GORM）映射数据库列。
+
+
+### **`xml:"name,attr"` 的具体含义**
+如果使用XML序列化（如 `encoding/xml` 包），这个标签会：
+1. **将字段映射到XML属性**：`Name` 字段会被序列化为XML元素的属性，而非子元素。
+2. **指定属性名称**：属性名会被指定为 `name`（而非默认的 `Name`）。
+
+#### **示例对比**
+假设没有标签：
+```go
+type Website struct {
+    Name string // 无标签
+}
+```
+XML输出：
+```xml
+<Website>
+  <Name>Golang</Name>
+</Website>
+```
+
+有 `xml:"name,attr"` 标签：
+```go
+type Website struct {
+    Name string `xml:"name,attr"`
+}
+```
+XML输出：
+```xml
+<Website name="Golang"></Website>
+```
+
+
+### **你的代码中的问题**
+由于你使用的是JSON编码，这个XML标签会被忽略。JSON序列化会使用默认规则（或 `json` 标签）：
+- 字段 `Name` 会被序列化为JSON键 `"Name"`（首字母大写，因为字段是公开的）。
+- 若想自定义JSON键名，需使用 `json` 标签：
+  ```go
+  Name string `json:"name"` // JSON键名为"name"
+  ```
+
+
+### **修正建议**
+如果你确实需要JSON序列化，应添加 `json` 标签：
+```go
+type Website struct {
+    Name   string   `json:"name"`
+    Url    string   `json:"url"`
+    Course []string `json:"course"`
+}
+```
+
+如果你需要XML序列化，应使用 `encoding/xml` 包，并保留 `xml` 标签：
+```go
+func Demo_writeXML() {
+    // ... 代码同上 ...
+    encoder := xml.NewEncoder(filePtr)
+    err = encoder.Encode(info)
+    // ...
+}
+```
+
+
+### **总结**
+- **`xml:"name,attr"`**：仅对XML序列化有效，将字段转为XML属性。
+- **JSON序列化**：需要使用 `json` 标签（如 `json:"name"`）。
+- **当前代码**：XML标签被忽略，JSON会使用字段名（首字母大写）作为键。
+
+=========================================================
