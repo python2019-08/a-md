@@ -3,12 +3,12 @@
 当使用 Pandoc 将 DOCX 转换为 Markdown 时，多余的反斜杠（`\`）通常是由于 Pandoc 对特殊字符进行了转义。这些转义可能是为了确保 Markdown 的兼容性，但在某些情况下会显得冗余。以下是几种解决方法：
 ### **0.**
 ```bash
-# mq: my best practice  
-inputPrefix=06struct
+# mq: my best practice   07interface.md
+inputPrefix=07interface
 docxName=${inputPrefix}.docx
 outMdName=${inputPrefix}.md
 
-outMediaPath=./media06
+outMediaPath=./media07
 pandoc ${docxName} -f docx -t gfm -o ${outMdName} --extract-media=${outMediaPath} --wrap=none
 ```
 

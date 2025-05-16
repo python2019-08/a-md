@@ -118,7 +118,7 @@ func Print[T any](s T) {
 ### **总结**
 Go 泛型提供了与 C++ 模板函数类似的功能，允许编写类型无关的代码，但语法更简洁，约束更明确，编译时错误提示更友好。如果你熟悉 C++ 模板，Go 泛型的概念很容易理解，但具体语法和使用方式有明显差异。
 
-
+==================================================
 # 2.golang 函数模板
 
 在 Go 语言中，函数是组织代码的基本单元。以下是常见的函数模板，涵盖不同场景和最佳实践：
@@ -487,3 +487,327 @@ func Demo_writeXML() {
 - **当前代码**：XML标签被忽略，JSON会使用字段名（首字母大写）作为键。
 
 =========================================================
+# 5.请解释  `json:"rows,omitempty"`
+```go
+type ConfigFieldUIOptions struct { 
+	Rows           string          `json:"rows,omitempty"`
+}
+```
+请解释  `json:"rows,omitempty"`
+
+
+在 Go 语言中，`json:"rows,omitempty"` 是一个结构体字段标签（Struct Tag），用于控制 JSON 序列化和反序列化的行为。以下是对该标签的详细解释：
+
+
+### **一、标签语法解析**
+```go
+Rows string `json:"rows,omitempty"`
+```
+- **`json`**：表示这是一个 JSON 相关的标签。
+- **`"rows"`**：指定 JSON 中的字段名（序列化和反序列化时使用）。
+- **`omitempty`**：可选参数，表示当字段值为空时（如空字符串、零值、nil 等），不包含该字段在 JSON 输出中。
+
+
+### **二、核心作用**
+#### **1. 字段重命名**
+若结构体字段名与 JSON 字段名不一致，可通过标签指定映射：
+```go
+type User struct {
+    Name string `json:"username"`  // JSON 中使用 "username"
+}
+```
+序列化后：
+```json
+{"username": "Alice"}
+```
+
+#### **2. 忽略空值字段**
+`omitempty` 可避免在 JSON 中输出无意义的空值：
+```go
+type Config struct {
+    Host string `json:"host,omitempty"`  // 空字符串时忽略
+    Port int    `json:"port,omitempty"`  // 零值时忽略
+}
+
+// 当字段为空时
+cfg := Config{Host: ""}
+```
+序列化后：
+```json
+{}  // 而非 {"host": ""}
+```
+
+
+### **三、示例验证**
+#### **结构体定义**
+```go
+type ConfigFieldUIOptions struct {
+    Rows string `json:"rows,omitempty"`
+}
+```
+
+#### **序列化行为**
+```go
+// 字段有值
+opts := ConfigFieldUIOptions{Rows: "5"}
+json.Marshal(opts)  // 输出: {"rows": "5"}
+
+// 字段为空
+opts = ConfigFieldUIOptions{}
+json.Marshal(opts)  // 输出: {}（而非 {"rows": ""}）
+```
+
+#### **反序列化行为**
+```json
+// JSON 输入
+{"rows": "10"}
+
+// 解析后
+ConfigFieldUIOptions{Rows: "10"}
+
+// 输入中无 "rows" 字段时
+ConfigFieldUIOptions{Rows: ""}  // 字段默认为空字符串
+```
+
+
+### **四、常见应用场景**
+1. **API 响应优化**  
+   避免返回大量空字段，减少数据传输量：
+   ```json
+   // 未使用 omitempty
+   {"name": "Alice", "age": 0, "email": ""}
+
+   // 使用 omitempty
+   {"name": "Alice"}
+   ```
+
+2. **兼容第三方 API**  
+   当 JSON 字段名与 Go 结构体字段名不一致时：
+   ```go
+   type GitHubUser struct {
+       Login string `json:"login"`  // 对应 GitHub API 的 "login" 字段
+   }
+   ```
+
+3. **可选配置项**  
+   配置文件中某些字段可选，无值时不生成：
+   ```go
+   type AppConfig struct {
+       Timeout int `json:"timeout,omitempty"`  // 无配置时忽略
+   }
+   ```
+
+
+### **五、注意事项**
+(1). **零值判断规则**  
+   `omitempty` 对不同类型的零值判断：
+   - **字符串**：空字符串 `""`  
+   - **数值**：0  
+   - **布尔值**：false  
+   - **指针/切片/映射**：nil  
+   - **结构体**：空结构体（需显式标记 `omitempty`）
+
+(2). **标签组合使用**  
+   可与其他标签组合（如 `yaml`、`xml`）：
+   ```go
+   type Person struct {
+       Name string `json:"name,omitempty" yaml:"name,omitempty"`
+   }
+   ```
+
+(3). **私有字段**  
+   未导出的字段（首字母小写）会被 JSON 包直接忽略，标签无效：
+   ```go
+   type Example struct {
+       privateField string `json:"private,omitempty"`  // 无效
+   }
+   ```
+
+
+### **总结**
+`json:"rows,omitempty"` 标签的作用是：
+- 指定 JSON 序列化/反序列化时的字段名。
+- 当字段值为空时，自动从 JSON 输出中省略该字段。
+
+这是 Go 语言处理 JSON 数据时的常用技巧，可提高数据传输效率和可读性。
+
+=========================================================
+# 6.除了忽略空值，还有哪些常见的标签值？
+
+在 Go 语言中，JSON 标签（`json:"..."`）除了 `omitempty` 外，还有许多其他常见的标签值和选项。以下是一些常用的标签配置及其应用场景：
+
+
+### **一、字段重命名**
+通过指定 JSON 字段名，实现结构体字段与 JSON 字段的映射：
+```go
+type User struct {
+    FullName string `json:"name"`      // JSON 中使用 "name"
+    Email    string `json:"email"`     // 字段名一致，可省略标签
+    Age      int    `json:"user_age"`  // 自定义名称（带下划线）
+}
+```
+**序列化结果**：
+```json
+{
+    "name": "Alice",
+    "email": "alice@example.com",
+    "user_age": 30
+}
+```
+
+
+### **二、忽略字段**
+使用 `-` 标签忽略某个字段，使其不参与序列化和反序列化：
+```go
+type User struct {
+    Password string `json:"-"`         // 永远忽略密码字段
+    Token    string `json:"-"`         // 敏感信息不暴露
+    Created  int64  `json:"created_at"`
+}
+```
+**序列化结果**：
+```json
+{
+    "created_at": 1694851200
+}
+```
+
+
+### **三、强制包含空值**
+使用 `,string` 标签将数值类型转换为字符串格式，避免空值被忽略：
+```go
+type Config struct {
+    Port   int    `json:"port,string"`    // 转为字符串，空值保留
+    Debug  bool   `json:"debug,string"`   // 布尔值转为字符串
+    Token  string `json:"token,omitempty"` // 普通字符串，空值忽略
+}
+```
+**序列化结果**：
+```go
+cfg := Config{Port: 0, Debug: false, Token: ""}
+// 输出: {"port": "0", "debug": "false"}
+```
+
+
+### **四、嵌套结构体展开**
+使用 `,inline` 标签将嵌套结构体的字段展开到外层：
+```go
+type Address struct {
+    City    string `json:"city"`
+    Country string `json:"country"`
+}
+
+type User struct {
+    Name    string  `json:"name"`
+    Contact Address `json:",inline"`  // 展开嵌套结构体
+}
+```
+**序列化结果**：
+```json
+{
+    "name": "Alice",
+    "city": "New York",
+    "country": "USA"
+}
+```
+
+
+### **五、处理指针类型**
+指针类型默认会被序列化为 `null`，可结合 `omitempty` 忽略：
+```go
+type User struct {
+    Age    *int    `json:"age,omitempty"`    // 指针，空值忽略
+    Email  *string `json:"email"`            // 指针，空值为 null
+}
+```
+**序列化结果**：
+```go
+// 当 Age 为 nil，Email 为非空指针时
+{"age": null, "email": "alice@example.com"}
+
+// 当 Age 和 Email 均为 nil 时
+{}  // 若 Email 也有 omitempty，则完全忽略
+```
+
+
+### **六、处理布尔值和数值**
+- `,string`：将数值或布尔值转为字符串格式。
+- `,omitempty`：忽略零值（如 `false`、`0`）。
+```go
+type Options struct {
+    Enabled bool  `json:"enabled,omitempty"`    // 忽略 false
+    Retry   int   `json:"retry,string"`         // 转为字符串
+    Weight  int   `json:"weight,omitempty"`     // 忽略 0
+}
+```
+**序列化结果**：
+```go
+opts := Options{Enabled: false, Retry: 3, Weight: 0}
+// 输出: {"retry": "3"}
+```
+
+
+### **七、处理嵌套数组和映射**
+```go
+type Response struct {
+    Items  []string  `json:"items,omitempty"`    // 空切片忽略
+    Config map[string]int `json:"config"`        // 空映射保留
+}
+```
+**序列化结果**：
+```go
+resp := Response{Items: nil, Config: nil}
+// 输出: {"config": null} （Items 被忽略，Config 保留 null）
+```
+
+
+### **八、组合标签示例**
+```go
+type Book struct {
+    ID        int       `json:"id"`             // 普通字段
+    Title     string    `json:"title,omitempty"`  // 空值忽略
+    Author    *string   `json:"author"`         // 指针，可为 null
+    Price     float64   `json:"price,string"`   // 转为字符串
+    Tags      []string  `json:"tags,omitempty"` // 空切片忽略
+    Secret    string    `json:"-"`              // 永远忽略
+}
+```
+
+
+### **九、其他标签选项**
+1. **处理 time.Time**  
+   使用 `,string` 将时间转为 RFC3339 格式字符串：
+   ```go
+   type Event struct {
+       CreatedAt time.Time `json:"created_at,string"`
+   }
+   ```
+
+2. **自定义序列化**  
+   实现 `json.Marshaler` 和 `json.Unmarshaler` 接口，配合标签使用：
+   ```go
+   type Duration time.Duration
+
+   func (d Duration) MarshalJSON() ([]byte, error) {
+       return json.Marshal(time.Duration(d).String())
+   }
+
+   type Config struct {
+       Timeout Duration `json:"timeout"`
+   }
+   ```
+
+
+### **总结**
+常见的 JSON 标签选项组合：
+| 标签示例              | 作用                                   |
+|-----------------------|----------------------------------------|
+| `json:"name"`         | 重命名字段                             |
+| `json:"-"`            | 忽略字段                               |
+| `json:"name,omitempty"` | 重命名并忽略空值                     |
+| `json:",inline"`      | 展开嵌套结构体                       |
+| `json:",string"`      | 转为字符串格式                       |
+| `json:",omitempty"`   | 忽略零值                             |
+
+合理使用这些标签可以让 JSON 序列化和反序列化更加灵活，满足各种复杂场景的需求。
+

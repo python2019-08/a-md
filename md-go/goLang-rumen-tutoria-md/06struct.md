@@ -6,63 +6,67 @@ Go语言入门教程，Golang入门教程（非常详细）
 
 <https://www.xinbaoku.com/archive/2DHvuPFr.html>
 
-# 目录
-
-[6.结构体 [3](#结构体)](\l)
-
-[6.1 Go语言结构体定义 ](\l)
-    [6.1.1 golang结构体标签（struct tags） ](\l)
-[6.2 Go语言实例化结构体 ](\l)
-    [6.2.1基本的实例化形式 ](\l)
-    [6.2.2创建指针类型的结构体 ](\l)
-    [6.2.3取结构体的地址实例化 ](\l)
-[6.3 初始化结构体的成员变量 ](\l)
-    [6.3.1使用“键值对”初始化结构体 ](\l)
-    [6.3.2使用多个值的列表初始化结构体 ](\l)
-    [6.3.3初始化匿名结构体 ](\l)
-[6.4 Go语言构造函数 ](\l)
-    [6.4.1多种方式创建和初始化结构体——模拟构造函数重载 ](\l)
-    [6.4.2带有父子关系的结构体的构造和初始化——模拟父级构造调用 ](\l)
-[6.5 Go语言方法和接收器 ](\l)
-    [6.5.1为结构体添加方法 ](\l)
-    [6.5.2接收器——方法作用的目标 ](\l)
-    [6.5.3示例：二维矢量模拟玩家移动 ](\l)
-[6.6 为任意类型添加方法 ](\l)
-    [6.6.1为基本类型添加方法 ](\l)
-    [6.6.2http包中的类型方法 ](\l)
-    [6.6.3time 包中的类型方法 ](\l)
-[6.7 示例：使用事件系统实现事件的响应和处理 ](\l)
-    [6.7.1方法和函数的统一调用 ](\l)
-    [6.7.2事件系统基本原理 ](\l)
-    [6.7.3事件注册 ](\l)
-    [6.7.4事件调用 ](\l)
-    [6.7.5使用事件系统 ](\l)
-[6.8 类型内嵌和结构体内嵌 ](\l)
-    [6.8.1内嵌结构体 ](\l)
-    [6.8.2结构内嵌特性 ](\l)
-[6.9 结构体内嵌模拟类的继承 ](\l)
-[6.10 初始化内嵌结构体 ](\l)
-    [6.10.1初始化内嵌匿名结构体 ](\l)
-[6.11 内嵌结构体成员名字冲突](\l)
-[6.12 示例：使用匿名结构体解析JSON数据](\l)
-    [6.12.1定义数据结构 ](\l)
-    [6.12.2准备 JSON 数据](\l)
-    [6.12.3分离JSON数据](\l)
-[6.13 Go语言垃圾回收和SetFinalizer](\l)
-[6.14 示例：将结构体数据保存为JSON格式数据](\l)
-[6.15 Go语言链表操作](\l)
-    [6.15.1单向链表](\l)
-    [6.15.2循环链表](\l)
-    [6.15.3双向链表](\l)
-[6.16 Go语言数据I/O对象及操作](\l)
-    [6.16.1ReadWriter 对象 ](\l)
-    [6.16.2Reader 对象](\l)
-    [创建 Reader 对象 ](\l)
-    [操作 Reader 对象 ](\l)
-[6.16.3Writer 对象](\l)
-    [创建 Writer 对象 ](\l)
-    [操作 Writer 对象](\l)
-
+# 0.目录
+> [6.结构体 [3](#结构体)](\l)
+> 
+> [6.1 Go语言结构体定义 ](\l)
+>     [6.1.1 golang结构体标签（struct tags） ](\l)
+> [6.2 Go语言实例化结构体 ](\l)
+>     [6.2.1基本的实例化形式 ](\l)
+>     [6.2.2创建指针类型的结构体 ](\l)
+>     [6.2.3取结构体的地址实例化 ](\l)
+> [6.3 初始化结构体的成员变量 ](\l)
+>     [6.3.1使用“键值对”初始化结构体 ](\l)
+>     [6.3.2使用多个值的列表初始化结构体 ](\l)
+>     [6.3.3初始化匿名结构体 ](\l)
+> [6.4 Go语言构造函数 ](\l)
+>     [6.4.1多种方式创建和初始化结构体——模拟构造函数重载 ](\l)
+>     [6.4.2带有父子关系的结构体的构造和初始化——模拟父级构造调用 ](\l)
+> [6.5 Go语言方法和接收器 ](\l)
+>     [6.5.1为结构体添加方法 ](\l)
+>     [6.5.2接收器——方法作用的目标 ](\l)
+>     [6.5.3示例：二维矢量模拟玩家移动 ](\l)
+> [6.6 为任意类型添加方法 ](\l)
+>     [6.6.1为基本类型添加方法 ](\l)
+>     [6.6.2http包中的类型方法 ](\l)
+>     [6.6.3time 包中的类型方法 ](\l)
+> [6.7 示例：使用事件系统实现事件的响应和处理 ](\l)
+>     [6.7.1方法和函数的统一调用 ](\l)
+>     [6.7.2事件系统基本原理 ](\l)
+>     [6.7.3事件注册 ](\l)
+>     [6.7.4事件调用 ](\l)
+>     [6.7.5使用事件系统 ](\l)
+> 
+>     
+> [6.8 类型内嵌和结构体内嵌 ](\l)
+>     [6.8.1内嵌结构体 ](\l)
+>     [6.8.2结构内嵌特性 ](\l)
+>     6.8+1结构体嵌入的 指针嵌入和值嵌入
+> [6.9 结构体内嵌模拟类的继承 ](\l)
+> [6.10 初始化内嵌结构体 ](\l)
+>     [6.10.1初始化内嵌匿名结构体 ](\l)
+> [6.11 内嵌结构体成员名字冲突](\l)
+> [6.12 示例：使用匿名结构体解析JSON数据](\l)
+>     [6.12.1定义数据结构 ](\l)
+>     [6.12.2准备 JSON 数据](\l)
+>     [6.12.3分离JSON数据](\l)
+> 
+> 
+> [6.13 Go语言垃圾回收和SetFinalizer](\l)
+> [6.14 示例：将结构体数据保存为JSON格式数据](\l)
+> [6.15 Go语言链表操作](\l)
+>     [6.15.1单向链表](\l)
+>     [6.15.2循环链表](\l)
+>     [6.15.3双向链表](\l)
+> [6.16 Go语言数据I/O对象及操作](\l)
+>     [6.16.1ReadWriter 对象 ](\l)
+>     [6.16.2Reader 对象](\l)
+>     [创建 Reader 对象 ](\l)
+>     [操作 Reader 对象 ](\l)
+> [6.16.3Writer 对象](\l)
+>     [创建 Writer 对象 ](\l)
+>     [操作 Writer 对象](\l)
+> appendix01 golang 的结构体 是 值类型还是引用类型
 
 # 6.[结构体](http://c.biancheng.net/golang/struct/)
 
@@ -239,106 +243,69 @@ Go语言让我们可以像访问普通结构体一样使用.来访问结构体�
 下面的例子定义了一个玩家（Player）的结构，玩家拥有名字、生命值和魔法值，实例化玩家（Player）结构体后，可对成员进行赋值，代码如下：
 
 1.  type Player struct{
-
-2.  Name string
-
-3.  HealthPoint int
-
-4.  MagicPoint int
-
+2.      Name string
+3.      HealthPoint int
+4.      MagicPoint int
 5.  }
-
 6.  
 
 7.  tank := new(Player)
-
 8.  tank.Name = "Canon"
-
 9.  tank.HealthPoint = 300
 
 经过 new 实例化的结构体实例在成员赋值上与基本实例化的写法一致。
 
 **Go语言和 C/<u>C++</u>**
 
-在 C/C++ 语言中，使用 new 实例化类型后，访问其成员变量时必须使用-\>操作符。  
-在Go语言中，访问结构体指针的成员变量时可以继续使用.，这是因为Go语言为了方便开发者访问结构体指针的成员变量，使用了语法糖（Syntactic sugar）技术，将 ins.Name 形式转换为 (\*ins).Name。
+在 C/C++ 语言中，使用 new 实例化类型后，访问其成员变量时必须使用->操作符。  
+在Go语言中，访问结构体指针的成员变量时可以继续使用.，这是因为Go语言为了方便开发者访问结构体指针的成员变量，使用了语法糖（Syntactic sugar）技术，将 ins.Name 形式转换为 (*ins).Name。
 
 ### 6.2.3取结构体的地址实例化
 
 在Go语言中，对结构体进行&取地址操作时，视为对该类型进行一次 new 的实例化操作，取地址格式如下：
-
 ins := &T{}
 
 其中：
-
 - T 表示结构体类型。
-
-- ins 为结构体的实例，**类型为 \*T**，是指针类型。
+- ins 为结构体的实例，**类型为 *T**，是指针类型。
 
 下面使用结构体定义一个命令行指令（Command），指令中包含名称、变量关联和注释等，对 Command 进行指针地址的实例化，并完成赋值过程，代码如下：
 
 1.  type Command struct {
-
-2.  Name string // 指令名称
-
-3.  Var \*int // 指令绑定的变量
-
-4.  Comment string // 指令的注释
-
+2.      Name string // 指令名称
+3.      Var  *int // 指令绑定的变量
+4.      Comment string // 指令的注释
 5.  }
-
 6.  
-
 7.  var version int = 1
-
 8.  
-
 9.  cmd := &Command{}
-
 10. cmd.Name = "version"
-
 11. cmd.Var = &version
-
 12. cmd.Comment = "show version"
 
 代码说明如下：
 
 - 第 1 行，定义 Command 结构体，表示命令行指令
-
 - 第 3 行，命令绑定的变量，使用整型指针绑定一个指针，指令的值可以与绑定的值随时保持同步。
-
 - 第 7 行，命令绑定的目标整型变量：版本号。
-
 - 第 9 行，对结构体取地址实例化。
-
 - 第 10～12 行，初始化成员字段。
 
 取地址实例化是最广泛的一种结构体实例化方式，可以使用函数封装上面的初始化过程，代码如下：
 
-1.  func newCommand(name string, varref \*int, comment string) \*Command {
-
-2.  return &Command{
-
-3.  Name: name,
-
-4.  Var: varref,
-
-5.  Comment: comment,
-
-6.  }
-
+1.  func newCommand(name string, varref *int, comment string) *Command {
+2.      return &Command{
+3.          Name: name,
+4.          Var: varref,
+5.          Comment: comment,
+6.      }
 7.  }
-
 8.  
-
 9.  cmd = newCommand(
-
-10. "version",
-
-11. &version,
-
-12. "show version",
-
+10.     "version",
+11.     &version,
+12.     "show version",
 13. )
 
 ## 6.3 [初始化结构体的成员变量](http://c.biancheng.net/view/67.html)
@@ -368,11 +335,8 @@ ins := 结构体类型名{
 }
 
 下面是对各个部分的说明：
-
 - 结构体类型：定义结构体时的类型名称。
-
 - 字段1、字段2：结构体成员的字段名，结构体类型名的字段初始化列表中，字段名只能出现一次。
-
 - 字段1的值、字段2的值：结构体成员字段的初始值。
 
 键值之间以:分隔，键值对之间以,分隔。
@@ -380,48 +344,79 @@ ins := 结构体类型名{
 #### 2) 使用键值对填充结构体的例子
 
 下面示例中描述了家里的人物关联，正如儿歌里唱的：“爸爸的爸爸是爷爷”，人物之间可以使用多级的 child 来描述和建立关联，使用键值对形式填充结构体的代码如下：
-
 1.  type People struct {
-
-2.  name string
-
-3.  child \*People
-
+2.      name string
+3.      child *People
 4.  }
-
 5.  
-
 6.  relation := &People{
-
-7.  name: "爷爷",
-
-8.  child: &People{
-
-9.  name: "爸爸",
-
-10. child: &People{
-
-11. name: "我",
-
-12. },
-
-13. },
-
+7.      name: "爷爷",
+8.      child: &People{
+9.          name: "爸爸",
+10.         child: &People{
+11.             name: "我",
+12.         },
+13.     },
 14. }
 
 代码说明如下：
 
 - 第 1 行，定义 People 结构体。
-
 - 第 2 行，结构体的字符串字段。
-
-- 第 3 行，结构体的结构体指针字段，类型是 \*People。
-
-- 第 6 行，relation 由 People 类型取地址后，形成类型为 \*People 的实例。
-
-- 第 8 行，child 在初始化时，需要 \*People 类型的值，使用取地址初始化一个 People。
+- 第 3 行，结构体的结构体指针字段，类型是 *People。
+- 第 6 行，relation 由 People 类型取地址后，形成类型为 *People 的实例。
+- 第 8 行，child 在初始化时，需要 *People 类型的值，使用取地址初始化一个 People。
 
 **提示：**结构体成员中只能包含结构体的指针类型，包含非指针类型会引起编译错误。**（abel:这话不正确）**
+
+```go
+// code by mq
+type Animal struct {
+	Name string
+	sz   int
+}
+
+type Cat struct {
+	Animal
+	legCnt int
+}
+
+type People struct {
+	name  string
+	child *People
+}
+
+func main() {
+	relation := People{
+		name: "爷爷",
+		child: &People{
+			name: "爸爸",
+			child: &People{
+				name: "我",
+			},
+		},
+	}
+
+	ani := Animal{
+		Name: "cat",
+		sz:   15,
+	}
+
+	cat01 := Cat{
+		Animal: Animal{
+			Name: "cat1",
+			sz:   22,
+		},
+		legCnt: 4,
+	}
+	cat01.sz = 223
+
+	fmt.Println("relation=", relation, "ani=", ani, "cat01=", cat01)
+} 
+// //output:
+// relation= {爷爷 0xc0001a0000} ani= {cat 15} cat01= {{cat1 223} 4}
+```
+
 
 ### 6.3.2使用多个值的列表初始化结构体
 
@@ -438,11 +433,8 @@ ins := 结构体类型名{
 }
 
 使用这种格式初始化时，需要注意：
-
 - 必须初始化结构体的所有字段。
-
 - 每一个初始值的填充顺序必须与字段在结构体中的声明顺序一致。
-
 - 键值对与值列表的初始化形式不能混用。
 
 #### 2) 多个值列表初始化结构体的例子
@@ -450,37 +442,22 @@ ins := 结构体类型名{
 下面的例子描述了一段地址结构，地址要求具有一定的顺序，例如：
 
 1.  type Address struct {
-
-2.  Province string
-
-3.  City string
-
-4.  ZipCode int
-
-5.  PhoneNumber string
-
+2.      Province string
+3.      City string
+4.      ZipCode int
+5.      PhoneNumber string
 6.  }
-
 7.  
-
 8.  addr := Address{
-
-9.  "四川",
-
-10. "成都",
-
-11. 610000,
-
-12. "0",
-
+9.      "四川",
+10.     "成都",
+11.     610000,
+12.     "0",
 13. }
-
 14. 
-
 15. fmt.Println(addr)
 
 运行代码，输出如下：
-
 {四川 成都 610000 0}
 
 ### 6.3.3初始化匿名结构体
@@ -506,13 +483,9 @@ ins := struct {
 下面是对各个部分的说明：
 
 - 字段1、字段2……：结构体定义的字段名。
-
 - 初始化字段1、初始化字段2……：结构体初始化时的字段名，可选择性地对字段初始化。
-
 - 字段类型1、字段类型2……：结构体定义字段的类型。
-
 - 字段1的值、字段2的值……：结构体初始化字段的初始值。
-
 键值对初始化部分是可选的，不初始化成员时，匿名结构体的格式变为：
 
 ins := struct {  
@@ -526,79 +499,44 @@ ins := struct {
 在本示例中，使用匿名结构体的方式定义和初始化一个消息结构，这个消息结构具有消息标示部分（ID）和数据部分（data），打印消息内容的 printMsg() 函数在接收匿名结构体时需要在参数上重新定义匿名结构体，代码如下：
 
 1.  package main
-
 2.  
-
 3.  import (
-
 4.  "fmt"
-
 5.  )
-
 6.  
-
 7.  // 打印消息类型, 传入匿名结构体
-
-8.  func printMsgType(msg \*struct {
-
+8.  func printMsgType(msg *struct {
 9.  id int
-
 10. data string
-
 11. }) {
-
 12. 
-
-13. // 使用动词%T打印msg的类型
-
-14. fmt.Printf("%T\n", msg)
-
+13.     // 使用动词%T打印msg的类型
+14.     fmt.Printf("%T\n", msg)
 15. }
-
 16. 
-
 17. func main() {
-
 18. 
-
 19. // 实例化一个匿名结构体
-
 20. msg := &struct { // 定义部分
-
-21. id int
-
-22. data string
-
+21.     id int
+22.     data string
 23. }{ // 值初始化部分
-
-24. 1024,
-
-25. "hello",
-
+24.     1024,
+25.     "hello",
 26. }
-
 27. 
-
 28. printMsgType(msg)
-
 29. }
 
 代码输出如下：
-
-\*struct { id int; data string }
-
+*struct { id int; data string }
 代码说明如下：
 
-- 第 8 行，定义 printMsgType() 函数，参数为 msg，类型为\*struct{id int data string}，因为类型没有使用 type 定义，所以需要在每次用到的地方进行定义。
-
+- 第 8 行，定义 printMsgType() 函数，参数为 msg，类型为*struct{id int data string}，因为类型没有使用 type 定义，所以需要在每次用到的地方进行定义。
 - 第 14 行，使用字符串格式化中的%T动词，将 msg 的类型名打印出来。
-
 - 第 20 行，对匿名结构体进行实例化，同时初始化成员。
-
 - 第 21 和 22 行，定义匿名结构体的字段。
-
 - 第 24 和 25 行，给匿名结构体字段赋予初始值。
-
 - 第 28 行，将 msg 传入 printMsgType() 函数中进行函数调用。
 
 匿名结构体的类型名是结构体包含字段成员的详细描述，匿名结构体在使用时需要重新定义，造成大量重复的代码，因此开发中较少使用。
@@ -608,13 +546,9 @@ ins := struct {
 Go语言的类型或结构体**没有构造函数**的功能，但是我们可以使用结构体初始化的过程来模拟实现构造函数。  
   
 其他编程语言构造函数的一些常见功能及特性如下：
-
 - 每个类可以添加构造函数，多个构造函数使用函数重载实现。
-
 - 构造函数一般与类名同名，且没有返回值。
-
 - 构造函数有一个静态构造函数，一般用这个特性来调用父类的构造函数。
-
 - 对于 C++ 来说，还有默认构造函数、拷贝构造函数等。
 
 ### 6.4.1多种方式创建和初始化结构体——模拟构造函数重载
@@ -622,47 +556,27 @@ Go语言的类型或结构体**没有构造函数**的功能，但是我们可�
 如果使用结构体描述猫的特性，那么根据猫的颜色和名字可以有不同种类的猫，那么不同的颜色和名字就是结构体的字段，同时可以使用颜色和名字构造不同种类的猫的实例，这个过程可以参考下面的代码：
 
 1.  type Cat struct {
-
-2.  Color string
-
-3.  Name string
-
+2.      Color string
+3.      Name string
 4.  }
-
 5.  
-
-6.  func NewCatByName(name string) \*Cat {
-
-7.  return &Cat{
-
-8.  Name: name,
-
-9.  }
-
+6.  func NewCatByName(name string) *Cat {
+7.      return &Cat{
+8.          Name: name,
+9.      }
 10. }
-
 11. 
-
-12. func NewCatByColor(color string) \*Cat {
-
-13. return &Cat{
-
-14. Color: color,
-
-15. }
-
+12. func NewCatByColor(color string) *Cat {
+13.     return &Cat{
+14.         Color: color,
+15.     }
 16. }
 
 代码说明如下：
-
 - 第 1 行定义 Cat 结构，包含颜色和名字字段。
-
 - 第 6 行定义用名字构造猫结构的函数，返回 Cat 指针。
-
 - 第 7 行取地址实例化猫的结构体。
-
 - 第 8 行初始化猫的名字字段，忽略颜色字段。
-
 - 第 12 行定义用颜色构造猫结构的函数，返回 Cat 指针。
 
 在这个例子中，颜色和名字两个属性的类型都是字符串，由于Go语言中没有函数重载，为了避免函数名字冲突，使用 NewCatByName() 和 NewCatByColor() 两个不同的函数名表示不同的 Cat 构造过程。
@@ -672,59 +586,33 @@ Go语言的类型或结构体**没有构造函数**的功能，但是我们可�
 黑猫是一种猫，猫是黑猫的一种泛称，同时描述这两种概念时，就是派生，黑猫派生自猫的种类，使用结构体描述猫和黑猫的关系时，将猫（Cat）的结构体嵌入到黑猫（BlackCat）中，表示黑猫拥有猫的特性，然后再使用两个不同的构造函数分别构造出黑猫和猫两个结构体实例，参考下面的代码：
 
 1.  type Cat struct {
-
-2.  Color string
-
-3.  Name string
-
+2.      Color string
+3.      Name string
 4.  }
-
 5.  
-
 6.  type BlackCat struct {
-
-7.  Cat // 嵌入Cat, 类似于派生
-
+7.      Cat // 嵌入Cat, 类似于派生
 8.  }
-
 9.  
-
 10. // “构造基类”
-
-11. func NewCat(name string) \*Cat {
-
-12. return &Cat{
-
-13. Name: name,
-
-14. }
-
+11. func NewCat(name string) *Cat {
+12.     return &Cat{
+13.         Name: name,
+14.     }
 15. }
-
 16. 
-
 17. // “构造子类”
-
-18. func NewBlackCat(color string) \*BlackCat {
-
-19. cat := &BlackCat{}
-
-20. cat.Color = color
-
-21. return cat
-
+18. func NewBlackCat(color string) *BlackCat {
+19.     cat := &BlackCat{}
+20.     cat.Color = color
+21.     return cat
 22. }
 
 代码说明如下：
-
 - 第 6 行，定义 BlackCat 结构，并嵌入了 Cat 结构体，BlackCat 拥有 Cat 的所有成员，实例化后可以自由访问 Cat 的所有成员。
-
 - 第 11 行，NewCat() 函数定义了 Cat 的构造过程，使用名字作为参数，填充 Cat 结构体。
-
 - 第 18 行，NewBlackCat() 使用 color 作为参数，构造返回 BlackCat 指针。
-
 - 第 19 行，实例化 BlackCat 结构，此时 Cat 也同时被实例化。
-
 - 第 20 行，填充 BlackCat 中嵌入的 Cat 颜色属性，BlackCat 没有任何成员，所有的成员都来自于 Cat。
 
 这个例子中，Cat 结构体类似于面向对象中的“基类”，BlackCat 嵌入 Cat 结构体，类似于面向对象中的“派生”，实例化时，BlackCat 中的 Cat 也会一并被实例化。  
@@ -754,45 +642,32 @@ Go语言的类型或结构体**没有构造函数**的功能，但是我们可�
 #### 1) 面向过程实现方法
 
 面向过程中没有“方法”概念，只能通过结构体和函数，由使用者使用函数参数和调用关系来形成接近“方法”的概念，代码如下：
-
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><p><mark>type Bag struct {</mark></p>
-<p><mark>    items []int</mark></p>
-<p><mark>}</mark></p>
-<p><mark>// 将一个物品放入背包的过程</mark></p>
-<p><mark>func Insert(b *Bag, itemid int) {</mark></p>
-<p><mark>    b.items = append(b.items, itemid)</mark></p>
-<p><mark>}</mark></p>
-<p><mark>func main() {</mark></p>
-<p><mark>    bag := new(Bag)</mark></p>
-<p><mark>    Insert(bag, 1001)</mark></p>
-<p><mark>}</mark></p></td>
-</tr>
-</tbody>
-</table>
-
+```go
+type Bag struct { 
+    items []int 
+} 
+// 将一个物品放入背包的过程
+func Insert(b *Bag, itemid int) {
+    b.items = append(b.items, itemid)
+} 
+func main() {
+    bag := new(Bag)
+    Insert(bag, 1001)
+} 
+```
 代码说明如下：
 
 - 第 1 行，声明 Bag 结构，这个结构体包含一个整型切片类型的 items 的成员。
-
-- 第 6 行，定义了 Insert() 函数，这个函数拥有两个参数，第一个是背包指针（\*Bag），第二个是物品 ID（itemid）。
-
+- 第 6 行，定义了 Insert() 函数，这个函数拥有两个参数，第一个是背包指针（*Bag），第二个是物品 ID（itemid）。
 - 第 7 行，用 append() 将 itemid 添加到 Bag 的 items 成员中，模拟往背包添加物品的过程。
-
 - 第 12 行，创建背包实例 bag。
-
 - 第 14 行，调用 Insert() 函数，第一个参数放入背包，第二个参数放入物品 ID。
 
-Insert() 函数将 \*Bag 参数放在第一位，强调 Insert 会操作 \*Bag 结构体，但实际使用中，并不是每个人都会习惯将操作对象放在首位，一定程度上让代码失去一些范式和描述性。同时，Insert() 函数也与 Bag 没有任何归属概念，随着类似 Insert() 的函数越来越多，面向过程的代码描述对象方法概念会越来越麻烦和难以理解。
+Insert() 函数将 *Bag 参数放在第一位，强调 Insert 会操作 *Bag 结构体，但实际使用中，并不是每个人都会习惯将操作对象放在首位，一定程度上让代码失去一些范式和描述性。同时，Insert() 函数也与 Bag 没有任何归属概念，随着类似 Insert() 的函数越来越多，面向过程的代码描述对象方法概念会越来越麻烦和难以理解。
 
 #### 2) Go语言的结构体方法
 
-将背包及放入背包的物品中使用Go语言的结构体和方法方式编写，为 \*Bag 创建一个方法，代码如下：
+将背包及放入背包的物品中使用Go语言的结构体和方法方式编写，为 *Bag 创建一个方法，代码如下：
 
 <table>
 <colgroup>
@@ -814,7 +689,7 @@ Insert() 函数将 \*Bag 参数放在第一位，强调 Insert 会操作 \*Bag �
 </tbody>
 </table>
 
-第 5 行中，Insert(itemid int) 的写法与函数一致，(b\*Bag) 表示接收器，即 Insert 作用的对象实例。
+第 5 行中，Insert(itemid int) 的写法与函数一致，(b*Bag) 表示接收器，即 Insert 作用的对象实例。
 
 每个方法只能有一个接收器，如下图所示。
 
@@ -865,7 +740,7 @@ value int // 属性值
 
 // 设置属性值
 
-func (p \*Property) SetValue(v int) {
+func (p *Property) SetValue(v int) {
 
 // 修改p的成员变量
 
@@ -875,7 +750,7 @@ p.value = v
 
 // 取属性值
 
-func (p \*Property) Value() int {
+func (p *Property) Value() int {
 
 return p.value
 
@@ -1041,7 +916,7 @@ v.Y - other.Y,
 
 func (v Vec2) Scale(s float32) Vec2 {
 
-return Vec2{v.X \* s, v.Y \* s}
+return Vec2{v.X * s, v.Y * s}
 
 }
 
@@ -1053,7 +928,7 @@ dx := v.X - other.X
 
 dy := v.Y - other.Y
 
-return float32(math.Sqrt(float64(dx\*dx + dy\*dy)))
+return float32(math.Sqrt(float64(dx*dx + dy*dy)))
 
 }
 
@@ -1061,13 +936,13 @@ return float32(math.Sqrt(float64(dx\*dx + dy\*dy)))
 
 func (v Vec2) Normalize() Vec2 {
 
-mag := v.X\*v.X + v.Y\*v.Y
+mag := v.X*v.X + v.Y*v.Y
 
-if mag \> 0 {
+if mag > 0 {
 
 oneOverMag := 1 / float32(math.Sqrt(float64(mag)))
 
-return Vec2{v.X \* oneOverMag, v.Y \* oneOverMag}
+return Vec2{v.X * oneOverMag, v.Y * oneOverMag}
 
 }
 
@@ -1129,7 +1004,7 @@ speed float32 // 移动速度
 
 // 移动到某个点就是设置目标位置
 
-func (p \*Player) MoveTo(v Vec2) {
+func (p *Player) MoveTo(v Vec2) {
 
 p.targetPos = v
 
@@ -1137,7 +1012,7 @@ p.targetPos = v
 
 // 获取当前的位置
 
-func (p \*Player) Pos() Vec2 {
+func (p *Player) Pos() Vec2 {
 
 return p.currPos
 
@@ -1145,17 +1020,17 @@ return p.currPos
 
 // 是否到达
 
-func (p \*Player) IsArrived() bool {
+func (p *Player) IsArrived() bool {
 
 // 通过计算当前玩家位置与目标位置的距离不超过移动的步长，判断已经到达目标点
 
-return p.currPos.DistanceTo(p.targetPos) \< p.speed
+return p.currPos.DistanceTo(p.targetPos) < p.speed
 
 }
 
 // 逻辑更新
 
-func (p \*Player) Update() {
+func (p *Player) Update() {
 
 if !p.IsArrived() {
 
@@ -1177,7 +1052,7 @@ p.currPos = newPos
 
 // 创建新玩家
 
-func NewPlayer(speed float32) \*Player {
+func NewPlayer(speed float32) *Player {
 
 return &Player{
 
@@ -1245,7 +1120,7 @@ fmt.Println(p.Pos())
 
 代码说明如下：
 
-- 第 8 行，使用 NewPlayer() 函数构造一个 \*Player 玩家对象，并设移动速度为 0.5，速度本身是一种相对的和抽象的概念，在这里没有单位，可以根据实际效果进行调整，达到合适的范围即可。
+- 第 8 行，使用 NewPlayer() 函数构造一个 *Player 玩家对象，并设移动速度为 0.5，速度本身是一种相对的和抽象的概念，在这里没有单位，可以根据实际效果进行调整，达到合适的范围即可。
 
 - 第 11 行，设定玩家移动的最终目标为 X 为 3，Y 为 1。
 
@@ -1431,7 +1306,7 @@ nginx
 
 在本例子第 24 行中使用的 req.Header 的类型为 http.Header，就是典型的自定义类型，并且拥有自己的方法，http.Header 的部分定义如下：
 
-type Header map\[string\]\[\]string
+type Header map[string][]string
 
 func (h Header) Add(key, value string) {
 
@@ -1485,15 +1360,15 @@ const (
 
 Nanosecond Duration = 1
 
-Microsecond = 1000 \* Nanosecond
+Microsecond = 1000 * Nanosecond
 
-Millisecond = 1000 \* Microsecond
+Millisecond = 1000 * Microsecond
 
-Second = 1000 \* Millisecond
+Second = 1000 * Millisecond
 
-Minute = 60 \* Second
+Minute = 60 * Second
 
-Hour = 60 \* Minute
+Hour = 60 * Minute
 
 )
 
@@ -1509,7 +1384,7 @@ func (d Duration) String() string {
 
 …
 
-return string(buf\[w:\])
+return string(buf[w:])
 
 }
 
@@ -1541,7 +1416,7 @@ type class struct {}
 
 // 给结构体添加Do方法
 
-func (c \*class) Do(v int) {
+func (c *class) Do(v int) {
 
 fmt.Println("call method do:", v)
 
@@ -1634,7 +1509,7 @@ package main
 
 // 实例化一个通过字符串映射函数切片的map
 
-var eventByName = make(map\[string\]\[\]func(interface{}))
+var eventByName = make(map[string][]func(interface{}))
 
 // 注册事件，提供事件名和回调函数
 
@@ -1642,7 +1517,7 @@ func RegisterEvent(name string, callback func(interface{})) {
 
 // 通过名字查找事件列表
 
-list := eventByName\[name\]
+list := eventByName[name]
 
 // 在列表切片中添加函数
 
@@ -1650,7 +1525,7 @@ list = append(list, callback)
 
 // 将修改的事件列表切片保存回去
 
-eventByName\[name\] = list}
+eventByName[name] = list}
 
 // 调用事件
 
@@ -1658,11 +1533,11 @@ func CallEvent(name string, param interface{}) {
 
 // 通过名字找到事件列表
 
-list := eventByName\[name\]
+list := eventByName[name]
 
 // 遍历这个事件的所有回调
 
-for \_, callback := range list {
+for _, callback := range list {
 
 // 传入参数调用回调
 
@@ -1674,11 +1549,11 @@ callback(param)
 
 代码说明如下：
 
-- 第 4 行，创建一个 map 实例，这个 map 通过事件名（string）关联回调列表（\[\]func(interface{}），同一个事件名称可能存在多个事件回调，因此使用回调列表保存。回调的函数声明为 func(interface{})。
+- 第 4 行，创建一个 map 实例，这个 map 通过事件名（string）关联回调列表（[]func(interface{}），同一个事件名称可能存在多个事件回调，因此使用回调列表保存。回调的函数声明为 func(interface{})。
 
 - 第 7 行，提供给外部的通过事件名注册响应函数的入口。
 
-- 第 10 行，eventByName 通过事件名（name）进行查询，返回回调列表（\[\]func(interface{}）。
+- 第 10 行，eventByName 通过事件名（name）进行查询，返回回调列表（[]func(interface{}）。
 
 - 第 13 行，为同一个事件名称在已经注册的事件回调的列表中再添加一个回调函数。
 
@@ -1714,7 +1589,7 @@ type Actor struct {}
 
 // 为角色添加一个事件处理函数
 
-func (a \*Actor) OnEvent(param interface{}) {
+func (a *Actor) OnEvent(param interface{}) {
 
 fmt.Println("actor event:", param)}
 
@@ -1783,63 +1658,35 @@ Go语言类型内嵌和结构体内嵌
 考虑如下的程序：
 
 1.  package main
-
 2.  import "fmt"
-
 3.  type innerS struct {
-
-4.  in1 int
-
-5.  in2 int
-
+4.      in1 int
+5.      in2 int
 6.  }
-
 7.  type outerS struct {
-
-8.  b int
-
-9.  c float32
-
-10. int // anonymous field
-
-11. innerS //anonymous field
-
+8.      b int
+9.      c float32
+10.     int // anonymous field
+11.     innerS //anonymous field
 12. }
-
 13. func main() {
-
-14. outer := new(outerS)
-
-15. outer.b = 6
-
-16. outer.c = 7.5
-
-17. outer.int = 60
-
-18. outer.in1 = 5
-
-19. outer.in2 = 10
-
-20. fmt.Printf("outer.b is: %d\n", outer.b)
-
-21. fmt.Printf("outer.c is: %f\n", outer.c)
-
-22. fmt.Printf("outer.int is: %d\n", outer.int)
-
-23. fmt.Printf("outer.in1 is: %d\n", outer.in1)
-
-24. fmt.Printf("outer.in2 is: %d\n", outer.in2)
-
-25. // 使用结构体字面量
-
-26. outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
-
-27. fmt.Printf("outer2 is:", outer2)
-
+14.     outer := new(outerS)
+15.     outer.b = 6
+16.     outer.c = 7.5
+17.     outer.int = 60
+18.     outer.in1 = 5
+19.     outer.in2 = 10
+20.     fmt.Printf("outer.b is: %d\n", outer.b)
+21.     fmt.Printf("outer.c is: %f\n", outer.c)
+22.     fmt.Printf("outer.int is: %d\n", outer.int)
+23.     fmt.Printf("outer.in1 is: %d\n", outer.in1)
+24.     fmt.Printf("outer.in2 is: %d\n", outer.in2)
+25.     // 使用结构体字面量
+26.     outer2 := outerS{6, 7.5, 60, innerS{5, 10}}
+27.     fmt.Printf("outer2 is:", outer2)
 28. }
 
 运行结果如下所示：
-
 outer.b is: 6  
 outer.c is: 7.500000  
 outer.int is: 60  
@@ -1856,35 +1703,21 @@ outer2 is:{6 7.5 60 {5 10}}
 示例代码如下所示：
 
 1.  package main
-
 2.  import "fmt"
-
 3.  type A struct {
-
-4.  ax, ay int
-
+4.      ax, ay int
 5.  }
-
 6.  type B struct {
-
-7.  A
-
-8.  bx, by float32
-
+7.      A
+8.      bx, by float32
 9.  }
-
 10. func main() {
-
-11. b := B{A{1, 2}, 3.0, 4.0}
-
-12. fmt.Println(b.ax, b.ay, b.bx, b.by)
-
-13. fmt.Println(b.A)
-
+11.     b := B{A{1, 2}, 3.0, 4.0}
+12.     fmt.Println(b.ax, b.ay, b.bx, b.by)
+13.     fmt.Println(b.A)
 14. }
 
 输出：
-
 1 2 3 4  
 {1 2}
 
@@ -1893,22 +1726,152 @@ outer2 is:{6 7.5 60 {5 10}}
 Go语言的结构体内嵌有如下特性。
 
 #### 1) 内嵌的结构体可以直接访问其成员变量
-
 嵌入结构体的成员，可以通过外部结构体的实例直接访问。如果结构体有多层嵌入结构体，结构体实例访问任意一级的嵌入结构体成员时都只用给出字段名，而无须像传统结构体字段一样，通过一层层的结构体字段访问到最终的字段。例如，ins.a.b.c的访问可以简化为ins.c。
 
 #### 2) 内嵌结构体的字段名是它的类型名
-
 内嵌结构体字段仍然可以使用详细的字段进行一层层访问，内嵌结构体的字段名就是它的类型名，代码如下：
-
 1.  var c Color
-
 2.  c.BasicColor.R = 1
-
 3.  c.BasicColor.G = 1
-
 4.  c.BasicColor.B = 0
-
 一个结构体只能嵌入一个同类型的成员，无须担心结构体重名和错误赋值的情况，编译器在发现可能的赋值歧义时会报错。
+
+
+
+
+## 6.8+1结构体嵌入的 指针嵌入和值嵌入
+
+```go
+type HelloServiceClient struct {
+	*rpc.Client
+}
+```
+这里，*rpc.Client是golang的什么语法?
+
+doubaoAI:
+
+在 Go 语言中，`*rpc.Client` 这种语法表示 **结构体嵌入（Struct Embedding）**，也称为 **匿名组合（Anonymous Composition）**。这是 Go 语言实现继承和代码复用的一种方式，允许一个结构体直接包含另一个结构体的字段和方法。
+
+
+### **一、语法解析**
+```go
+type HelloServiceClient struct {
+    *rpc.Client  // 嵌入指针类型的结构体
+}
+```
+- **含义**：`HelloServiceClient` 结构体**隐式包含**了 `rpc.Client` 的所有字段和方法。
+- **类型**：嵌入的是 `*rpc.Client`（指针类型），而非 `rpc.Client`（值类型）。
+
+
+### **二、核心特性**
+#### **1. 方法和字段的继承**
+`HelloServiceClient` 可以直接调用 `rpc.Client` 的方法，无需显式转发：
+```go
+client := &HelloServiceClient{rpc.Dial("tcp", "localhost:1234")}
+client.Call("Service.Method", args, &reply)  // 直接调用 rpc.Client 的方法
+```
+
+#### **2. 访问控制**
+- 嵌入结构体的**导出字段和方法**（首字母大写）会被提升为外部结构体的字段和方法。
+- 未导出的字段和方法（首字母小写）无法直接访问。
+
+#### **3. 指针 vs 值嵌入**
+- **指针嵌入（`*rpc.Client`）**：多个实例共享同一个底层对象，修改会影响所有引用。
+- **值嵌入（`rpc.Client`）**：每个实例有独立的副本，修改不会相互影响。
+
+
+### **三、使用场景**
+#### **1. 扩展已有类型**
+为 `rpc.Client` 添加额外功能，同时保留原有接口：
+```go
+type LoggedClient struct {
+    *rpc.Client
+    logger *log.Logger
+}
+
+// 添加新方法
+func (c *LoggedClient) LoggedCall(serviceMethod string, args, reply interface{}) error {
+    c.logger.Printf("Calling %s", serviceMethod)
+    return c.Client.Call(serviceMethod, args, reply)  // 调用嵌入的方法
+}
+```
+
+#### **2. 实现接口组合**
+通过嵌入多个结构体，组合多个接口的功能：
+```go
+type HTTPRequest struct {
+    *bytes.Buffer  // 嵌入 io.Reader 和 io.Writer 接口的实现
+    url.URL
+}
+```
+
+
+### **四、与传统继承的区别**
+| 特性               | Go 结构体嵌入                | 传统继承（如 Java）         |
+|--------------------|------------------------------|----------------------------|
+| 语法               | 显式嵌入结构体               | 通过 `extends` 关键字       |
+| 实现方式           | 组合（Composition）          | 继承（Inheritance）         |
+| 类型关系           | 无类型关系，仅方法提升       | 子类是父类的子类型         |
+| 多重继承           | 支持嵌入多个结构体           | 不支持多重继承             |
+| 方法重写           | 通过定义同名方法覆盖         | 通过 `override` 关键字      |
+
+
+### **五、注意事项**
+1. **命名冲突**：若嵌入多个结构体存在同名方法，需显式指定调用路径：
+   ```go
+   client.rpc.Client.Call(...)  // 明确指定调用 rpc.Client 的方法
+   ```
+
+2. **初始化**：嵌入指针类型时，需确保指针已初始化：
+   ```go
+   client := &HelloServiceClient{
+       Client: rpc.Dial("tcp", "localhost:1234"),  // 显式初始化
+   }
+   ```
+
+3. **接口实现**：若嵌入的结构体实现了某个接口，外部结构体也会被视为实现了该接口。
+
+
+### **六、示例代码**
+```go
+package main
+
+import (
+    "fmt"
+    "net/rpc"
+)
+
+// 定义服务客户端
+type HelloServiceClient struct {
+    *rpc.Client
+}
+
+// 添加新方法
+func (c *HelloServiceClient) SayHello(name string) (string, error) {
+    var reply string
+    err := c.Client.Call("HelloService.Say", name, &reply)
+    return reply, err
+}
+
+func main() {
+    // 初始化客户端
+    rpcClient, _ := rpc.Dial("tcp", "localhost:1234")
+    client := &HelloServiceClient{rpcClient}
+
+    // 调用嵌入的方法
+    client.Close()
+
+    // 调用自定义方法
+    reply, _ := client.SayHello("World")
+    fmt.Println(reply)
+}
+```
+
+
+### **总结**
+`*rpc.Client` 在 Go 中是**结构体嵌入语法**，允许 `HelloServiceClient` 直接使用 `rpc.Client` 的所有功能，同时可以添加新方法或修改行为。这是 Go 语言实现代码复用和接口组合的核心机制之一，相比传统继承更灵活、更清晰。
+
+
 
 ## 6.9 [结构体内嵌模拟类的继承](http://c.biancheng.net/view/vip_7325.html)
 
@@ -1925,103 +1888,68 @@ Go语言的结构体内嵌特性就是一种组合特性，使用组合特性可
 下面的代码使用Go语言的结构体内嵌实现对象特性组合，请参考下面的代码。
 
 人和鸟的特性：
-
+```go
 package main
 
 import "fmt"
 
 // 可飞行的
-
 type Flying struct{}
 
-func (f \*Flying) Fly() {
-
-fmt.Println("can fly")
-
+func (f *Flying) Fly() {
+    fmt.Println("can fly")
 }
 
 // 可行走的
-
 type Walkable struct{}
 
-func (f \*Walkable) Walk() {
-
-fmt.Println("can calk")
-
+func (f *Walkable) Walk() {
+    fmt.Println("can calk")
 }
 
 // 人类
-
 type Human struct {
-
-Walkable // 人类能行走
-
+    Walkable // 人类能行走
 }
 
 // 鸟类
-
 type Bird struct {
-
-Walkable // 鸟类能行走
-
-Flying // 鸟类能飞行
-
+    Walkable // 鸟类能行走
+    Flying // 鸟类能飞行
 }
 
 func main() {
+    // 实例化鸟类
+    b := new(Bird)
+    fmt.Println("Bird: ")
+    b.Fly()
+    b.Walk()
 
-// 实例化鸟类
-
-b := new(Bird)
-
-fmt.Println("Bird: ")
-
-b.Fly()
-
-b.Walk()
-
-// 实例化人类
-
-h := new(Human)
-
-fmt.Println("Human: ")
-
-h.Walk()
+    // 实例化人类
+    h := new(Human)
+    fmt.Println("Human: ")
+    h.Walk()
 
 }
-
+```
 代码说明如下：
 
 - 第 6 行，声明可飞行结构（Flying）。
-
 - 第 8 行，为可飞行结构添加飞行方法 Fly()。
-
 - 第 13 行，声明可行走结构（Walkable）。
-
 - 第 15 行，为可行走结构添加行走方法 Walk()。
-
 - 第 20 行，声明人类结构。这个结构嵌入可行走结构（Walkable），让人类具备“可行走”特性
-
 - 第 25 行，声明鸟类结构。这个结构嵌入可行走结构（Walkable）和可飞行结构（Flying），让鸟类具备既可行走又可飞行的特性。
-
 - 第 33 行，实例化鸟类结构。
-
 - 第 35 和 36 行，调用鸟类可以使用的功能，如飞行和行走。
-
 - 第 39 行，实例化人类结构。
-
 - 第 41 行，调用人类能使用的功能，如行走。
 
 运行代码，输出如下：
-
 Bird:
-
 can fly
-
 can calk
-
 Human:
-
 can calk
 
 使用Go语言的内嵌结构体实现对象特性，可以自由地在对象中增、删、改各种特性。Go语言会在编译时检查能否使用这些特性。
@@ -2035,97 +1963,52 @@ Go语言初始化内嵌结构体
 结构体内嵌初始化时，将结构体内嵌的类型作为字段名像普通结构体一样进行初始化，详细实现过程请参考下面的代码。  
   
 车辆结构的组装和初始化：
-
 1.  package main
-
 2.  
-
 3.  import "fmt"
-
 4.  
-
 5.  // 车轮
-
 6.  type Wheel struct {
-
-7.  Size int
-
+7.      Size int
 8.  }
-
 9.  
-
 10. // 引擎
-
 11. type Engine struct {
-
-12. Power int // 功率
-
-13. Type string // 类型
-
+12.     Power int // 功率
+13.     Type string // 类型
 14. }
-
 15. 
-
 16. // 车
-
 17. type Car struct {
-
-18. Wheel
-
-19. Engine
-
+18.     Wheel
+19.     Engine
 20. }
-
 21. 
-
 22. func main() {
-
 23. 
-
-24. c := Car{
-
+24.     c := Car{
 25. 
-
-26. // 初始化轮子
-
-27. Wheel: Wheel{
-
-28. Size: 18,
-
-29. },
-
+26.         // 初始化轮子
+27.         Wheel: Wheel{
+28.             Size: 18,
+29.         },
 30. 
-
-31. // 初始化引擎
-
-32. Engine: Engine{
-
-33. Type: "1.4T",
-
-34. Power: 143,
-
-35. },
-
-36. }
-
+31.         // 初始化引擎
+32.         Engine: Engine{
+33.             Type: "1.4T",
+34.             Power: 143,
+35.         },
+36.     }
 37. 
-
-38. fmt.Printf("%+v\n", c)
-
+38.     fmt.Printf("%+v\n", c)
 39. 
-
 40. }
 
 代码说明如下：
-
 - 第 6 行定义车轮结构。
-
 - 第 11 行定义引擎结构。
-
 - 第 17 行定义车结构，由车轮和引擎结构体嵌入。
-
 - 第 27 行，将 Car 的 Wheel 字段使用 Wheel 结构体进行初始化。
-
 - 第 32 行，将 Car 的 Engine 字段使用 Engine 结构体进行初始化。
 
 ### 6.10.1初始化内嵌匿名结构体
@@ -2133,93 +2016,51 @@ Go语言初始化内嵌结构体
 在前面描述车辆和引擎的例子中，有时考虑编写代码的便利性，会将结构体直接定义在嵌入的结构体中。也就是说，结构体的定义不会被外部引用到。在初始化这个被嵌入的结构体时，就需要再次声明结构才能赋予数据。具体请参考下面的代码。
 
 1.  package main
-
 2.  
-
 3.  import "fmt"
-
 4.  
-
 5.  // 车轮
-
 6.  type Wheel struct {
-
-7.  Size int
-
+7.      Size int
 8.  }
-
 9.  
-
 10. // 车
-
 11. type Car struct {
-
-12. Wheel
-
-13. // 引擎
-
-14. Engine struct {
-
-15. Power int // 功率
-
-16. Type string // 类型
-
-17. }
-
+12.     Wheel
+13.     // 引擎
+14.     Engine struct {
+15.         Power int // 功率
+16.         Type string // 类型
+17.     }
 18. }
-
 19. 
-
 20. func main() {
-
 21. 
-
-22. c := Car{
-
+22.     c := Car{
 23. 
-
-24. // 初始化轮子
-
-25. Wheel: Wheel{
-
-26. Size: 18,
-
-27. },
-
+24.         // 初始化轮子
+25.         Wheel: Wheel{
+26.             Size: 18,
+27.         },
 28. 
-
-29. // 初始化引擎
-
-30. Engine: struct {
-
-31. Power int
-
-32. Type string
-
-33. }{
-
-34. Type: "1.4T",
-
-35. Power: 143,
-
-36. },
-
-37. }
-
+29.         // 初始化引擎
+30.         Engine: struct {
+31.             Power int
+32.             Type string
+33.         }{
+34.             Type: "1.4T",
+35.             Power: 143,
+36.         },
+37.     }
 38. 
-
-39. fmt.Printf("%+v\n", c)
-
+39.     fmt.Printf("%+v\n", c)
 40. 
-
 41. }
 
 代码说明如下：
 
 - 第 14 行中原来的 Engine 结构体被直接定义在 Car 的结构体中。这种嵌入的写法就是将原来的结构体类型转换为 struct{…}。
-
 - 第 30 行，需要对 Car 的 Engine 字段进行初始化，由于 Engine 字段的类型并没有被单独定义，因此在初始化其字段时需要先填写 struct{…} 声明其类型。
-
 - 第 3行开始填充这个匿名结构体的数据，按“键：值”格式填充。
 
 ## 6.11 [内嵌结构体成员名字冲突](http://c.biancheng.net/view/75.html)
@@ -2231,82 +2072,47 @@ Go语言内嵌结构体成员名字冲突
 嵌入结构体内部可能拥有相同的成员名，成员重名时会发生什么？下面通过例子来讲解。
 
 1.  package main
-
 2.  
-
 3.  import (
-
 4.  "fmt"
-
 5.  )
-
 6.  
-
 7.  type A struct {
-
-8.  a int
-
+8.      a int
 9.  }
-
 10. 
-
 11. type B struct {
-
-12. a int
-
+12.     a int
 13. }
-
 14. 
-
 15. type C struct {
-
-16. A
-
-17. B
-
+16.     A
+17.     B
 18. }
-
 19. 
-
 20. func main() {
-
-21. c := &C{}
-
-22. c.A.a = 1
-
-23. fmt.Println(c)
-
+21.     c := &C{}
+22.     c.A.a = 1
+23.     fmt.Println(c)
 24. }
 
 代码说明如下：
-
 - 第 7 行和第 11 行分别定义了两个拥有 a int 字段的结构体。
-
 - 第 15 行的结构体嵌入了 A 和 B 的结构体。
-
 - 第 21 行实例化 C 结构体。
-
 - 第 22 行按常规的方法，访问嵌入结构体 A 中的 a 字段，并赋值 1。
-
 - 第 23 行可以正常输出实例化 C 结构体。
 
 接着，将第 22 行修改为如下代码：
-
 1.  func main() {
-
-2.  c := &C{}
-
-3.  c.a = 1
-
-4.  fmt.Println(c)
-
+2.      c := &C{}
+3.      c.a = 1
+4.      fmt.Println(c)
 5.  }
 
 此时再编译运行，编译器报错：
-
 .\main.go:22:3: ambiguous selector c.a
-
-编译器告知 C 的选择器 a 引起歧义，也就是说，编译器无法决定将 1 赋给 C 中的 A 还是 B 里的字段 a。  
+编译器告知 C 的选择器 a 引起歧义，也就是说，编译器无法决定将 1 赋给 C 中的 A 还是 B 里的字段 a。 
   
 在使用内嵌结构体时，Go语言的编译器会非常智能地提醒我们可能发生的歧义和错误。
 
@@ -4190,3 +3996,134 @@ func (b \*Writer) WriteString(s string) (int, error)
 运行结果如下：
 
 C语言中文网 16 \<nil\>
+
+========================================================
+## appendix01 golang 的结构体 是 值类型还是引用类型
+
+在 Go 语言中，**结构体（struct）是值类型**，但可以通过指针实现类似引用类型的行为。以下是详细解释和示例：
+
+
+### **一、结构体是值类型**
+1. **赋值和传参时复制值**  
+   当结构体被赋值给另一个变量或作为参数传递时，会复制整个结构体的内容：
+   ```go
+   type Point struct {
+       X, Y int
+   }
+
+   func main() {
+       p1 := Point{1, 2}
+       p2 := p1       // 复制 p1 的值到 p2
+       p2.X = 100     // 修改 p2 不会影响 p1
+       fmt.Println(p1) // 输出: {1 2}
+       fmt.Println(p2) // 输出: {100 2}
+   }
+   ```
+
+2. **函数内修改不影响原结构体**  
+   函数参数接收的是结构体的副本，修改副本不会影响原始值：
+   ```go
+   func modify(p Point) {
+       p.X = 100      // 修改的是副本
+   }
+
+   func main() {
+       p := Point{1, 2}
+       modify(p)
+       fmt.Println(p) // 输出: {1 2}（未被修改）
+   }
+   ```
+
+
+### **二、通过指针实现引用行为**
+1. **结构体指针的赋值和传参**  
+   使用指针时，赋值和传参传递的是内存地址，而非值的副本：
+   ```go
+   func modifyByPtr(p *Point) {
+       p.X = 100      // 通过指针修改原始值
+   }
+
+   func main() {
+       p := &Point{1, 2}
+       modifyByPtr(p)
+       fmt.Println(p) // 输出: &{100 2}（已被修改）
+   }
+   ```
+
+2. **结构体包含指针字段**  
+   结构体内部的指针字段不会被深拷贝：
+   ```go
+   type Person struct {
+       Name string
+       Age  *int    // 指针字段
+   }
+
+   func main() {
+       age := 30
+       p1 := Person{Name: "Alice", Age: &age}
+       p2 := p1       // 复制结构体，但 Age 指向同一内存地址
+       *p2.Age = 31   // 修改指针指向的值
+       fmt.Println(*p1.Age) // 输出: 31（p1 也被修改）
+   }
+   ```
+
+
+### **三、值类型 vs 引用类型对比**
+| **特性**               | **值类型（结构体）**         | **引用类型（切片、映射）**    |
+|------------------------|-----------------------------|-----------------------------|
+| 赋值/传参时的行为      | 复制整个值                  | 复制引用（共享底层数据）      |
+| 修改是否影响原值       | 否                          | 是                          |
+| 内存占用               | 与字段数量和大小成正比       | 固定大小（指针+元数据）       |
+| 零值                   | 各字段的零值组合            | nil                         |
+
+
+### **四、常见场景选择**
+1. **使用值类型的情况**  
+   - 结构体较小且无需修改原值。  
+   - 需要保持数据的不可变性。  
+   - 作为 map 的键（必须是可比较的类型）。
+
+2. **使用指针类型的情况**  
+   - 结构体较大，频繁传递时为避免复制开销。  
+   - 需要在函数内部修改原始结构体。  
+   - 实现接口时（接口方法接收者为指针）。
+
+
+### **五、示例对比**
+#### **值类型行为**
+```go
+type Rectangle struct {
+    Width, Height float64
+}
+
+func (r Rectangle) Area() float64 {
+    return r.Width * r.Height
+}
+
+func main() {
+    r1 := Rectangle{10, 20}
+    r2 := r1
+    r2.Width = 100
+    fmt.Println(r1.Area()) // 输出: 200（r1 未被修改）
+}
+```
+
+#### **引用类型行为（通过指针）**
+```go
+func (r *Rectangle) SetWidth(w float64) {
+    r.Width = w
+}
+
+func main() {
+    r1 := &Rectangle{10, 20}
+    r2 := r1
+    r2.SetWidth(100)
+    fmt.Println(r1.Area()) // 输出: 2000（r1 被修改）
+}
+```
+
+
+### **总结**
+- **结构体本身是值类型**，赋值和传参时会复制整个值。  
+- **通过指针**可以实现引用语义，避免复制开销并修改原始数据。  
+- **选择值类型还是指针类型**取决于具体场景，需权衡性能和语义需求。
