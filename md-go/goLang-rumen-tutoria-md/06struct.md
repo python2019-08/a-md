@@ -802,6 +802,28 @@ func main() {
 
 在计算机中，小对象由于值复制时的速度较快，所以适合使用非指针接收器，大对象因为复制性能较低，适合使用指针接收器，在接收器和参数间传递时不进行复制，只是传递指针。
 mq注：**非指针接收器** 用于对 对象的成员只有**只读的操作**； **指针接收器** 用于对 对象的成员 有 **写的操作**；
+```go
+//-------code by mq----
+type Rectangle struct {
+	Width, Height float64
+}
+// 对r 只有读操作，所以 r 可以是 Rectangle类型
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+// 有写操作，所以 r 是 *Rectangle
+func (r *Rectangle) SetWidth(w float64) {
+	r.Width = w
+}
+func main() {
+	r1 := Rectangle{10, 20}
+	r2 := r1
+	r2.SetWidth(100)
+	fmt.Println(r1.Area()) // 输出: 2000（r1 被修改）
+
+	fmt.Println("r1=", r1, "r2=", r2)
+}
+```
 
 ### 6.5.3示例：二维矢量模拟玩家移动
 
